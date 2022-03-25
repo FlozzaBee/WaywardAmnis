@@ -40,6 +40,11 @@ public class UIManager : MonoBehaviour
             indicatorFilled = true;
             IndicatorAnimator.SetTrigger("IndicatorFilled");
         }
+
+        if (flockManager.playerFlockSize != flockTargetSize)
+        {
+            indicatorFilled = false; //resets the indicator toggle 
+        }
         swarmSizeIndicator.fillAmount = Mathf.SmoothDamp(swarmSizeIndicator.fillAmount, indicatorAmount, ref indicatorVelocityRef, smoothTime);
     }
 

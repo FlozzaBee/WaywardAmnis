@@ -18,6 +18,8 @@ public class FlockManager : MonoBehaviour
     public bool eventInProgress;
 
     private GameObject[] agentList;
+    private int playerFlockSizePrevious; //used to track when player flock size increases
+    private CharacterMovement characterMovement; //used to call haptics 
     
     
     
@@ -33,6 +35,8 @@ public class FlockManager : MonoBehaviour
             agentScripts[i].speed = AssignSpeed(); //randomly assigns the speed of each agent by accessing its script 
             agentScripts[i].flockManager = this;
         }
+
+        characterMovement = player.GetComponent<CharacterMovement>();
     }
 
     private float AssignSpeed()
@@ -58,6 +62,12 @@ public class FlockManager : MonoBehaviour
                 agentScripts[i].moveAgent(eventTransform);
             } //if event is in progress moves player flock boids towards a different target
         } //calls move agent class on each FlockAgent script
+
+        if (playerFlockSize > playerFlockSizePrevious)
+        {
+            playerFlockSizePrevious = playerFlockSize;
+            characterMovement.ControllerRumbleLight();
+        }
     }
 
 }

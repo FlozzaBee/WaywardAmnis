@@ -12,6 +12,11 @@ public class CharacterMovement : MonoBehaviour
     public EventManager eventManager;
     public FlockManager flockManager;
 
+    [Header("HapticSettings")]
+    [Range(0, 1)]
+    public float lightRumbleStrength;
+    public float lightVibrateDuration;
+
     [Header("ControllerDebug")]
     public bool controllerEnabled = false;
     [Range(0, 1)]
@@ -74,4 +79,19 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
+    //haptic controller 
+    public void ControllerRumbleLight()
+    {
+        Gamepad.current.SetMotorSpeeds(lightRumbleStrength, lightRumbleStrength);
+        Debug.Log("haptics started");
+        StartCoroutine(lightVibrationDuration(lightVibrateDuration));
+    }
+
+    IEnumerator lightVibrationDuration(float vibrateDuration)
+    {
+        yield return new WaitForSeconds(vibrateDuration);
+        Gamepad.current.SetMotorSpeeds(0, 0);
+        Gamepad.current.ResetHaptics();
+        Debug.Log("haptics stopped");
+    }
 }
