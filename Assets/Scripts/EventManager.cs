@@ -17,20 +17,32 @@ public class EventManager : MonoBehaviour
     public Animator[] DoorAnim;
 
     [Header("Hammerhead pass event")]
-    public int hammerheadFlockSize = 18;
+    public int SharkFlockSizeTarget = 18;
     public Animator hammerheadAnimator; //i was working on this its not finished yet dont forget 
+    public GameObject shark;
+    public GameObject sharkBarrier;
+    public Animation sharkFleeAnim;
+
+    private bool sharkFollow = false; 
      
     
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T))
+        /*if (Input.GetKeyDown(KeyCode.T))
         {
             Debug.Log("animStarting?");
             foreach (Animator animator in BuildingAnim)
             {
                 animator.SetBool("IsFallTrigger", true);
             }
-        }
+        }*/
+
+        if (sharkFollow == true)
+        {
+            flockManager.eventTransform = shark.transform;
+            Debug.Log("shark event should be happening");
+        } //tells the boids where the shark is for shark event. 
+
     }
     public void DoorOpenAnimation() //animation classes are called in ontriggerenter in the character movement scripts.
     {
@@ -55,12 +67,37 @@ public class EventManager : MonoBehaviour
         {
             animator.SetBool("IsFallTrigger", true); //sets the IsFallTriggre on the building animators after a certain amount of seconds
         }
-        uiManager.flockTargetSize = hammerheadFlockSize;
+        uiManager.flockTargetSize = SharkFlockSizeTarget;
     }
 
-    public void HammerheadAnimation()
+    public void SharkEvent() //called through CharacterMovement
     {
-        
+        if (flockManager.playerFlockSize < SharkFlockSizeTarget)
+        {
+            uiManager.IndicatorShake(); //calls the indicator shake animation thorugh the ui manager
+        }
+
+        else
+        {
+            sharkFollow = true;
+            flockManager.eventInProgress = true;
+            flockManager.playerFlockSize = 0;
+            shark.GetComponent<Animator>().SetTrigger("SharkFleeTrigger");
+            StartCoroutine(WaitForSharkEvent(1));
+            StartCoroutine(WaitForSharkBarrier(3));
+        }
+    }
+
+    IEnumerator WaitForSharkEvent(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        shark.GetComponent<Animator>().SetFloat("SpinSpeedMultiplier", 2.5f);
+    }
+
+    IEnumerator WaitForSharkBarrier(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        sharkBarrier.SetActive(false);
     }
 }
 

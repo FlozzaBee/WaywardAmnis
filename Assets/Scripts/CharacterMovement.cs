@@ -18,7 +18,7 @@ public class CharacterMovement : MonoBehaviour
     public float lightVibrateDuration;
 
     [Header("ControllerDebug")]
-    public bool controllerEnabled = false;
+    public bool controllerDebug = false;
     [Range(0, 1)]
     public float vibrationLowFreq = 0;
     [Range(0, 1)]
@@ -26,12 +26,27 @@ public class CharacterMovement : MonoBehaviour
 
     private float turnSmoothVelocity;
     private float marvinStopper;
+    private bool controllerEnabled = false;
 
 
     private void Start()
     {
         marvinStopper = transform.position.z;
+
+        /*for (int i = 0; i < InputSystem.devices.Count; i++)
+        {
+            Debug.Log(InputSystem.devices[i]);
+
+        }*/
+        Debug.Log(Gamepad.all.Count);
+        
+        if (Gamepad.all.Count > 0)
+        {
+            controllerEnabled = true; 
+        }//checks for controllers and sets bool to true if found
     }
+
+    
     void Update()
     {
         float horizontal = Input.GetAxisRaw("Horizontal"); //gets horizontal input (a,d)
@@ -54,7 +69,7 @@ public class CharacterMovement : MonoBehaviour
             Debug.Log("Quit Called");
         }
 
-        if (controllerEnabled == true)
+        if (controllerDebug == true)
         {
             Gamepad.current.SetMotorSpeeds(vibrationLowFreq, vibrationHighFreq);
         }
@@ -77,21 +92,33 @@ public class CharacterMovement : MonoBehaviour
         {
             eventManager.BuildingFallAnimation();
         }
+
+        if (other.tag == "SharkTrigger")
+        {
+            eventManager.SharkEvent(); //calls SharkEvent when touches the shark trigger
+        }
     }
 
     //haptic controller 
+
+    
+
     public void ControllerRumbleLight()
     {
-        Gamepad.current.SetMotorSpeeds(lightRumbleStrength, lightRumbleStrength);
-        Debug.Log("haptics started");
-        StartCoroutine(lightVibrationDuration(lightVibrateDuration));
+        if (controllerEnabled == true) //checks if controller is connected, otherwise causes crashes when haptics are called and no controller is plugged in. 
+        {
+            Gamepad.current.SetMotorSpeeds(lightRumbleStrength, lightRumbleStrength);
+
+            Debug.Log("haptics started");
+            StartCoroutine(lightVibrationDuration(lightVibrateDuration));
+        }
     }
 
     IEnumerator lightVibrationDuration(float vibrateDuration)
     {
         yield return new WaitForSeconds(vibrateDuration);
         Gamepad.current.SetMotorSpeeds(0, 0);
-        Gamepad.current.ResetHaptics();
+        //Gamepad.current.ResetHaptics();
         Debug.Log("haptics stopped");
     }
 }

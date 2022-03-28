@@ -7,6 +7,7 @@ TagManager:
   - flockAgent
   - DoorTrigger
   - BuildingFallTrigger
+  - SharkTrigger
   layers:
   - Default
   - TransparentFX

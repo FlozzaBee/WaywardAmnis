@@ -53,13 +53,17 @@ public class UIManager : MonoBehaviour
         indicatorInitialized = true;
         IndicatorAnimator.SetTrigger("IndicatorInitialize");
         StartCoroutine(waitForInitialize(1f));
-
     }
 
     IEnumerator waitForInitialize(float animationTime)
     {
         yield return new WaitForSeconds(animationTime);
         indicatorAmount = flockManager.playerFlockSize / flockTargetSize;
+    }
+
+    public void IndicatorShake()
+    {
         
+        IndicatorAnimator.SetTrigger("IndicatorShake");
     }
 }
