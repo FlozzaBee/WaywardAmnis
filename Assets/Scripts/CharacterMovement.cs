@@ -11,6 +11,7 @@ public class CharacterMovement : MonoBehaviour
     public float turnSmoothTime = 0.1f;
     public EventManager eventManager;
     public FlockManager flockManager;
+    public Animator anim;
 
     [Header("HapticSettings")]
     [Range(0, 1)]
@@ -59,6 +60,11 @@ public class CharacterMovement : MonoBehaviour
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.z, targetAngle, ref turnSmoothVelocity, turnSmoothTime); //smoothly moves from current to target angle
             transform.rotation = Quaternion.Euler(0f, 0f, angle); //applies smoothed rotation
             controller.Move(direction * speed * Time.deltaTime); //applies movement
+            anim.SetBool("PlayerSmoving", true); //Moving animation enabled
+        }
+        else
+        {
+         anim.SetBool("PlayerSmoving", false);   
         }
 
         
