@@ -74,9 +74,9 @@ public class FlockAgent : MonoBehaviour
         }
     }
 
-    public void moveAgent(Transform TargetPosition)
+    public void moveAgent(Vector3 TargetPosition)
     {
-        Vector3 moveDirection = CalculateMovementDirection(TargetPosition.position); //calls the calculatemovementdirection funtion
+        Vector3 moveDirection = CalculateMovementDirection(TargetPosition); //calls the calculatemovementdirection funtion
         Vector3 moveVector = Vector3.SmoothDamp(transform.forward, moveDirection, ref currentVelocity, smoothDampVelocity); //gradually changes movevector to be closer to moveDirection
         moveVector = moveVector.normalized * speed * inFlockSpeedModifier; //normalizes the moveVector and applies speed multiplier
         transform.forward = moveVector; //changes the agents rotation to face its target

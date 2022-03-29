@@ -107,18 +107,32 @@ public class CharacterMovement : MonoBehaviour
     {
         if (controllerEnabled == true) //checks if controller is connected, otherwise causes crashes when haptics are called and no controller is plugged in. 
         {
+            /*
             Gamepad.current.SetMotorSpeeds(lightRumbleStrength, lightRumbleStrength);
-
             Debug.Log("haptics started");
             StartCoroutine(lightVibrationDuration(lightVibrateDuration));
+            */
+
+            foreach (Gamepad gamepad in Gamepad.all)
+            {
+                gamepad.SetMotorSpeeds(lightRumbleStrength, lightRumbleStrength);
+                StartCoroutine(lightVibrationDuration(lightVibrateDuration));
+            }
         }
     }
 
     IEnumerator lightVibrationDuration(float vibrateDuration)
     {
         yield return new WaitForSeconds(vibrateDuration);
+        foreach (Gamepad gamepad in Gamepad.all)
+        {
+            gamepad.SetMotorSpeeds(0, 0);
+        }
+        
+        /*
         Gamepad.current.SetMotorSpeeds(0, 0);
         //Gamepad.current.ResetHaptics();
         Debug.Log("haptics stopped");
+        */
     }
 }
