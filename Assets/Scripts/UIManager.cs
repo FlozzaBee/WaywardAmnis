@@ -27,7 +27,7 @@ public class UIManager : MonoBehaviour
         if (flockManager.playerFlockSize == 1 && indicatorInitialized == false)
         {
             IndicatorInitialize();
-        }
+        }// plays initialization anim when you pick up first fish
 
         if (flockManager.playerFlockSize > 1)
         {

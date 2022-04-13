@@ -21,7 +21,6 @@ public class EventManager : MonoBehaviour
     public Animator hammerheadAnimator; //i was working on this its not finished yet dont forget 
     public GameObject shark;
     public GameObject sharkBarrier;
-    public Animation sharkFleeAnim;
 
     private bool sharkFollow = false; 
      
@@ -51,8 +50,20 @@ public class EventManager : MonoBehaviour
             animator.SetTrigger("IsOpenTrigger"); //sets the IsOpenTrigger in each door animatior
         }
     }
+    public void BuildingEvent(Collider trigger)
+    {
+        if (flockManager.playerFlockSize < uiManager.flockTargetSize)
+        {
+            uiManager.IndicatorShake();
+        }
+        else
+        {
+            BuildingFallAnimation();
+            trigger.enabled = false;
+        }
+    }
 
-    public void BuildingFallAnimation()
+    void BuildingFallAnimation()
     {
         flockManager.eventTransform = buildingFallAgentTarget.transform;
         flockManager.eventInProgress = true;
@@ -70,7 +81,7 @@ public class EventManager : MonoBehaviour
         uiManager.flockTargetSize = SharkFlockSizeTarget;
     }
 
-    public void SharkEvent() //called through CharacterMovement
+    public void SharkEvent(Collider trigger) //called through CharacterMovement
     {
         if (flockManager.playerFlockSize < SharkFlockSizeTarget)
         {
@@ -85,6 +96,7 @@ public class EventManager : MonoBehaviour
             shark.GetComponent<Animator>().SetTrigger("SharkFleeTrigger");
             StartCoroutine(WaitForSharkEvent(1));
             StartCoroutine(WaitForSharkBarrier(3));
+            trigger.enabled = false;
         }
     }
 

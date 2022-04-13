@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Haptics;
+using UnityEngine.SceneManagement;
 
 public class CharacterMovement : MonoBehaviour
 {
@@ -11,6 +11,7 @@ public class CharacterMovement : MonoBehaviour
     public float turnSmoothTime = 0.1f;
     public EventManager eventManager;
     public FlockManager flockManager;
+    public UIManager uiManager;
     public Animator anim;
 
     [Header("HapticSettings")]
@@ -73,7 +74,12 @@ public class CharacterMovement : MonoBehaviour
         {
             Application.Quit();
             Debug.Log("Quit Called");
-        }
+        }//quits program on esc (and r2 for some reason?)
+
+        if (Input.GetButtonDown("Reset"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }//reloads scene on R 
 
         if (controllerDebug == true)
         {
@@ -94,15 +100,15 @@ public class CharacterMovement : MonoBehaviour
             eventManager.DoorOpenAnimation();
         }
 
-        if (other.tag == "BuildingFallTrigger" && flockManager.playerFlockSize > eventManager.buildingAnimFlockSize)
+        if (other.tag == "BuildingFallTrigger" )
         {
-            eventManager.BuildingFallAnimation();
+            eventManager.BuildingEvent(other);
         }
 
         if (other.tag == "SharkTrigger")
         {
-            eventManager.SharkEvent(); //calls SharkEvent when touches the shark trigger
-        }
+            eventManager.SharkEvent(other); 
+        }//calls events in event manager when touches triggers
     }
 
     //haptic controller 
