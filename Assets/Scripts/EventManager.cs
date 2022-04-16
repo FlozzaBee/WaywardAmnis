@@ -5,6 +5,7 @@ using UnityEngine;
 public class EventManager : MonoBehaviour
 {
     public UIManager uiManager;
+    public CharacterMovement characterMovement;
 
     [Header("Building fall event")]
     public FlockManager flockManager;
@@ -21,6 +22,7 @@ public class EventManager : MonoBehaviour
     public Animator hammerheadAnimator; //i was working on this its not finished yet dont forget 
     public GameObject shark;
     public GameObject sharkBarrier;
+    public float sharkAttackFleeDuration = 1f;
 
     private bool sharkFollow = false; 
      
@@ -86,6 +88,9 @@ public class EventManager : MonoBehaviour
         if (flockManager.playerFlockSize < SharkFlockSizeTarget)
         {
             uiManager.IndicatorShake(); //calls the indicator shake animation thorugh the ui manager
+            characterMovement.playerControl = false;
+            characterMovement.eventDirection = new Vector3(0, -1, 0);
+            StartCoroutine(waitForEventMovement(sharkAttackFleeDuration));
         }
 
         else
@@ -100,6 +105,12 @@ public class EventManager : MonoBehaviour
         }
     }
 
+    IEnumerator waitForEventMovement(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        characterMovement.playerControl = true;
+    }
+
     IEnumerator WaitForSharkEvent(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
@@ -110,6 +121,13 @@ public class EventManager : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
         sharkBarrier.SetActive(false);
+    }
+
+    public void AirMovementTrigger()
+    {
+        characterMovement.movementType = 1; //sets movement type to air movement, called in character movement
+                                            //(ik bouncing around between character and event controllers is weird, just planning for water>air
+                                            //event stuff later
     }
 }
 
