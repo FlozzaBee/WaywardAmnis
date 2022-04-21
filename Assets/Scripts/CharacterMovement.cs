@@ -11,7 +11,9 @@ public class CharacterMovement : MonoBehaviour
     public FlockManager flockManager;
     public UIManager uiManager;
     public Animator anim;
-    
+
+    public int movementType = 0; //0 = water, 1 = air, 2 = land //public for debug only
+
     [Header("Ocean Movement Settings")]
     public float speed = 12f;
     public float turnSmoothTime = 0.1f;
@@ -22,8 +24,12 @@ public class CharacterMovement : MonoBehaviour
     public float airSpeedSmoothTime = 0.1f; //time to accelerate to target speed
     public float airIdleAngleSmoothTime = 0.5f; //time to rotate to idle angle from movement angle
     public float airIdleAnimMultiplier =0.5f;
+    public float airWallCollisionDist = 4; //used for raycast wall detection distance
     private float airCurrentSpeed;
     private float airSpeedRef; //used for smoothdamp ref
+    private float airTargetAngle;
+    private bool isIdleTurning = false;
+    private LayerMask layerMask;
 
     [Header("HapticSettings")]
     [Range(0, 1)]
@@ -41,7 +47,8 @@ public class CharacterMovement : MonoBehaviour
     private float turnSmoothVelocity1;
     private float marvinStopper;
     private bool controllerEnabled = false;
-    public int movementType = 0; //0 = water, 1 = air, 2 = land //public for debug only
+
+    
 
     //eventManager related
     [HideInInspector]
@@ -49,7 +56,6 @@ public class CharacterMovement : MonoBehaviour
     [HideInInspector]
     public Vector3 eventDirection;
 
-    public float rangeTest = 180;
 
 
     private void Start()
@@ -67,6 +73,8 @@ public class CharacterMovement : MonoBehaviour
         {
             controllerEnabled = true; 
         }//checks for controllers and sets bool to true if found
+
+        layerMask = LayerMask.GetMask("Wall");
     }
 
     
@@ -96,7 +104,6 @@ public class CharacterMovement : MonoBehaviour
             PlayerMovementAir(direction);
         }
 
-
         if (Input.GetButtonDown("Escape"))
         {
             Application.Quit();
@@ -112,6 +119,8 @@ public class CharacterMovement : MonoBehaviour
         {
             Gamepad.current.SetMotorSpeeds(vibrationLowFreq, vibrationHighFreq);
         }
+        
+        
     }
 
     private void LateUpdate()
@@ -164,45 +173,60 @@ public class CharacterMovement : MonoBehaviour
     private void PlayerMovementAir(Vector3 direction)
     {
         float targetSpeed;
-        float targetAngle;
+        
         float angle = transform.rotation.eulerAngles.z; ;
 
 
         if (direction.sqrMagnitude >= 0.1f)
         {
-            targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; //sets targetAngle to the direction of travel (in degrees)
-            angle = Mathf.SmoothDampAngle(angle, targetAngle, ref turnSmoothVelocity, turnSmoothTime); //smoothly moves from current to target angle
-            //transform.rotation = Quaternion.Euler(0f, 0f, angle); //applies smoothed rotation
+            airTargetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; //sets targetAngle to the direction of travel (in degrees)
+            angle = Mathf.SmoothDampAngle(angle, airTargetAngle, ref turnSmoothVelocity, turnSmoothTime); //smoothly moves from current to target angle    
 
             targetSpeed = airSpeed; //assigns target speed to in motion speed
-            //airCurrentSpeed = Mathf.SmoothDamp(airCurrentSpeed, targetSpeed, ref airSpeedRef, airSpeedSmoothTime);
-            //controller.Move(direction * airCurrentSpeed * Time.deltaTime); //applies movement
-            //anim.SetBool("PlayerSmoving", true); //Moving animation enabled
-            //Debug.Log(angle);
 
             anim.SetFloat("AnimSpeedMultiplier", 1); //resets anim speed mult to 1 after idle.
         }
         else
         {
-             
-            targetAngle = 0;
             targetSpeed = airIdleSpeed; //asigns target to idle speed
-
-            //Debug.Log(angle);
-            if ((angle >= 90 && angle <= 270)) //if between 90 & 270 degrees rotation (aka looking left
+            if (isIdleTurning == false)
             {
-                targetAngle = 180;
-            } //im stupid 
-            angle = Mathf.SmoothDampAngle(angle, targetAngle, ref turnSmoothVelocity1, airIdleAngleSmoothTime);
-            //transform.rotation = Quaternion.Euler(0f, 0f, angle);
+                airTargetAngle = 0;
+
+                if ((angle >= 90 && angle <= 270)) //if between 90 & 270 degrees rotation (aka looking left)
+                {
+                    airTargetAngle = 180;
+                } //im stupid 
+            }//only sets target angle outside of idle turn time
+            angle = Mathf.SmoothDampAngle(angle, airTargetAngle, ref turnSmoothVelocity1, airIdleAngleSmoothTime);
             direction = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle), 0);
-            //airCurrentSpeed = Mathf.SmoothDamp(airCurrentSpeed, targetSpeed, ref airSpeedRef, airSpeedSmoothTime);
-            //controller.Move(direction * airCurrentSpeed * Time.deltaTime);
 
             anim.SetFloat("AnimSpeedMultiplier", airIdleAnimMultiplier); // slows corns movement animation by multiplier while idle
+
+            //raycast stuff to make the player turn if they idle hit a wall
+            RaycastHit hitRight;
+            if (Physics.Raycast(transform.position, new Vector3(1, 0, 0) * 100, out hitRight, airWallCollisionDist, layerMask) && isIdleTurning == false)
+            {
+                isIdleTurning = true;
+                airTargetAngle = 180;
+                StartCoroutine(WaitForIdleTurn(1.5f));
+                //Debug.Log("right ray " + hitRight.collider.gameObject);
+                //Debug.Log("right ray " + hitRight.distance);
+                Debug.DrawRay(transform.position, (new Vector3(1, 0, 0) * 100), Color.magenta, 1);
+            }
+
+            RaycastHit hitLeft;
+            if (Physics.Raycast(transform.position, new Vector3(-1, 0, 0) * 100, out hitLeft, airWallCollisionDist, layerMask) && isIdleTurning == false)
+            {
+                isIdleTurning = true;
+                airTargetAngle = 0;
+                StartCoroutine(WaitForIdleTurn(1.5f));
+                //Debug.Log("left ray " + hitLeft.collider.gameObject);
+                //Debug.Log("left ray " + hitLeft.distance);
+                Debug.DrawRay(transform.position, new Vector3(-1, 0, 0) * 100, Color.cyan, 1);
+            }
         }
 
-        
         transform.rotation = Quaternion.Euler(0f, 0f, angle);
         airCurrentSpeed = Mathf.SmoothDamp(airCurrentSpeed, targetSpeed, ref airSpeedRef, airSpeedSmoothTime);
         controller.Move(direction * airCurrentSpeed * Time.deltaTime);
@@ -224,6 +248,12 @@ public class CharacterMovement : MonoBehaviour
                 StartCoroutine(lightVibrationDuration(lightVibrateDuration));
             }
         }
+    }
+
+    IEnumerator WaitForIdleTurn(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        isIdleTurning = false;
     }
 
     IEnumerator lightVibrationDuration(float vibrateDuration)

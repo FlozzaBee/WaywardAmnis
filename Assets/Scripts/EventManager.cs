@@ -24,8 +24,11 @@ public class EventManager : MonoBehaviour
     public GameObject sharkBarrier;
     public float sharkAttackFleeDuration = 1f;
 
-    private bool sharkFollow = false; 
-     
+    private bool sharkFollow = false;
+
+
+    [Header("Air Initialise")]
+    public AirFlockManager airFlockManager;
     
     void Update()
     {
@@ -128,6 +131,8 @@ public class EventManager : MonoBehaviour
         characterMovement.movementType = 1; //sets movement type to air movement, called in character movement
                                             //(ik bouncing around between character and event controllers is weird, just planning for water>air
                                             //event stuff later
+
+        airFlockManager.enabled = true;
     }
 }
 
