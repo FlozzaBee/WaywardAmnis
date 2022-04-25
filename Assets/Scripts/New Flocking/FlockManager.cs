@@ -12,6 +12,8 @@ public class FlockManager : MonoBehaviour
     public float minSpeed;
     public float maxSpeed;
     public float targetRandomisationMultiplier = 1;
+    [Range(0, 0.5f)]
+    public float randomiseScaleBy = 0.1f;
 
     [HideInInspector]
     public List<GameObject> inPlayerFlock; //uses list instead of array since its easier to add to
@@ -39,6 +41,10 @@ public class FlockManager : MonoBehaviour
             agentScripts[i].speed = AssignSpeed(); //randomly assigns the speed of each agent by accessing its script 
             agentScripts[i].flockManager = this;
             randomiseTargetVector[i] = Random.insideUnitSphere * targetRandomisationMultiplier; //gives each member of the flock a unique random target vector offset
+            
+            float randomScale = (Random.Range(1 + randomiseScaleBy, 1 - randomiseScaleBy));
+            Vector3 scale = new Vector3(randomScale, randomScale, randomScale);
+            agentList[i].transform.localScale = scale; 
         }
 
         characterMovement = player.GetComponent<CharacterMovement>();

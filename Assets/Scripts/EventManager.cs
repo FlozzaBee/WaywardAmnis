@@ -124,6 +124,7 @@ public class EventManager : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
         sharkBarrier.SetActive(false);
+        uiManager.indicatorOutro();
     }
 
     public void AirMovementTrigger()

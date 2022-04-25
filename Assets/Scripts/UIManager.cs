@@ -66,4 +66,9 @@ public class UIManager : MonoBehaviour
         
         IndicatorAnimator.SetTrigger("IndicatorShake");
     }
+
+    public void indicatorOutro()
+    {
+        IndicatorAnimator.SetTrigger("IndicatorOutro");
+    }
 }

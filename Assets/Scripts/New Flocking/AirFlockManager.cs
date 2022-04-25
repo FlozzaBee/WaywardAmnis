@@ -12,6 +12,10 @@ public class AirFlockManager : MonoBehaviour
     public float minSpeed;
     public float maxSpeed;
     public float targetRandomisationMultiplier = 1;
+
+    [Range(0, 0.5f)]
+    public float randomiseScaleBy = 0.1f;
+
     public float animSpeedMin = 0.9f;
     public float animSpeedMax = 1.1f;
 
@@ -43,6 +47,10 @@ public class AirFlockManager : MonoBehaviour
             randomiseTargetVector[i] = Random.insideUnitSphere * targetRandomisationMultiplier; //gives each member of the flock a unique random target vector offset
             Animator anim = agentList[i].GetComponentInChildren<Animator>();
             anim.SetFloat("AnimSpeedModifier", Random.Range(animSpeedMin, animSpeedMax));
+
+            float randomScale = (Random.Range(1 + randomiseScaleBy, 1 - randomiseScaleBy));
+            Vector3 scale = new Vector3(randomScale, randomScale, randomScale);
+            agentList[i].transform.localScale = scale;
         }
 
         
