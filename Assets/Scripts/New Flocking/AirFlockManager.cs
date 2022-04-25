@@ -28,7 +28,7 @@ public class AirFlockManager : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         agentList = GameObject.FindGameObjectsWithTag("AirFlockAgent"); //finds all agents and adds them to agentList array
         agentScripts = new AirFlockAgent[agentList.Length]; //makes new array of FlockAgent scripts with the number of agents as the length

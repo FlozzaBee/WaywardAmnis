@@ -21,7 +21,7 @@ public class AirFlockAgent : MonoBehaviour
     
 
 
-    private void Start()
+    private void Awake()
     {
         startPosition = transform.position;
         

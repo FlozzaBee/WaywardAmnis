@@ -17,6 +17,9 @@ public class CharacterMovement : MonoBehaviour
     [Header("Ocean Movement Settings")]
     public float speed = 12f;
     public float turnSmoothTime = 0.1f;
+    public float waterSpeedSmoothTime = 0.25f;
+    private float waterSpeedCurrent;
+    private float waterSpeedRef;
 
     [Header("Air Movement Settings")]
     public float airSpeed = 24;
@@ -87,7 +90,7 @@ public class CharacterMovement : MonoBehaviour
             float horizontal = Input.GetAxisRaw("Horizontal"); //gets horizontal input (a,d)
             float vertical = Input.GetAxisRaw("Vertical"); //gets vert input (w,s)
             direction = new Vector3(horizontal, vertical, 0f).normalized; //cretes vector3 with the combined movement inputs, normalised so diagonals are the same speed
-
+            //Debug.Log("Input " + direction);
             
         }
 
@@ -156,25 +159,34 @@ public class CharacterMovement : MonoBehaviour
 
     private void PlayerMovement(Vector3 direction)//called in update
     {
+        float targetSpeed;
+        float angle;
         if (direction.sqrMagnitude >= 0.1f)
         {
+            targetSpeed = speed;
             float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; //sets targetAngle to the direction of travel (in degrees)
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.z, targetAngle, ref turnSmoothVelocity, turnSmoothTime); //smoothly moves from current to target angle
-            transform.rotation = Quaternion.Euler(0f, 0f, angle); //applies smoothed rotation
-            controller.Move(direction * speed * Time.deltaTime); //applies movement
+            angle = Mathf.SmoothDampAngle(transform.eulerAngles.z, targetAngle, ref turnSmoothVelocity, turnSmoothTime); //smoothly moves from current to target angle
+            transform.rotation = Quaternion.Euler(0f, 0f, angle); //applies smoothed 
             anim.SetBool("PlayerSmoving", true); //Moving animation enabled
         }
         else
         {
+            angle = transform.rotation.eulerAngles.z;
+            targetSpeed = 0;
+            direction = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle), 0); //calculates what direction ur facing
             anim.SetBool("PlayerSmoving", false);
         }
+        waterSpeedCurrent = Mathf.SmoothDamp(waterSpeedCurrent, targetSpeed, ref waterSpeedRef, waterSpeedSmoothTime);
+        controller.Move(direction * waterSpeedCurrent * Time.deltaTime);
+        //smoothhh yeah
+        //Debug.Log(waterSpeedCurrent);
     }
 
     private void PlayerMovementAir(Vector3 direction)
     {
         float targetSpeed;
         
-        float angle = transform.rotation.eulerAngles.z; ;
+        float angle = transform.rotation.eulerAngles.z;
 
 
         if (direction.sqrMagnitude >= 0.1f)
