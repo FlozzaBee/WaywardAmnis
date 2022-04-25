@@ -12,6 +12,8 @@ public class AirFlockManager : MonoBehaviour
     public float minSpeed;
     public float maxSpeed;
     public float targetRandomisationMultiplier = 1;
+    public float animSpeedMin = 0.9f;
+    public float animSpeedMax = 1.1f;
 
     [HideInInspector]
     public List<GameObject> inPlayerFlock; //uses list instead of array since its easier to add to
@@ -28,7 +30,7 @@ public class AirFlockManager : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         agentList = GameObject.FindGameObjectsWithTag("AirFlockAgent"); //finds all agents and adds them to agentList array
         agentScripts = new AirFlockAgent[agentList.Length]; //makes new array of FlockAgent scripts with the number of agents as the length
@@ -39,7 +41,11 @@ public class AirFlockManager : MonoBehaviour
             agentScripts[i].speed = AssignSpeed(); //randomly assigns the speed of each agent by accessing its script 
             agentScripts[i].flockManager = this;
             randomiseTargetVector[i] = Random.insideUnitSphere * targetRandomisationMultiplier; //gives each member of the flock a unique random target vector offset
+            Animator anim = agentList[i].GetComponentInChildren<Animator>();
+            anim.SetFloat("AnimSpeedModifier", Random.Range(animSpeedMin, animSpeedMax));
         }
+
+        
 
         characterMovement = player.GetComponent<CharacterMovement>();
 
