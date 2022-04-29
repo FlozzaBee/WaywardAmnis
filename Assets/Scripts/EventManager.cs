@@ -29,6 +29,9 @@ public class EventManager : MonoBehaviour
 
     [Header("Air Initialise")]
     public AirFlockManager airFlockManager;
+
+    [Header("Air Barrier")]
+    public int airBarrierTargetFlockSize;
     
     void Update()
     {
@@ -63,16 +66,11 @@ public class EventManager : MonoBehaviour
         }
         else
         {
-            BuildingFallAnimation();
+            flockManager.eventTransform = buildingFallAgentTarget.transform;
+            flockManager.eventInProgress = true;
+            StartCoroutine(WaitForBuildingFall(buildingAnimTime));
             trigger.enabled = false;
         }
-    }
-
-    void BuildingFallAnimation()
-    {
-        flockManager.eventTransform = buildingFallAgentTarget.transform;
-        flockManager.eventInProgress = true;
-        StartCoroutine(WaitForBuildingFall(buildingAnimTime)); 
     }
 
     IEnumerator WaitForBuildingFall(float waitTime)
@@ -131,9 +129,15 @@ public class EventManager : MonoBehaviour
     {
         characterMovement.movementType = 1; //sets movement type to air movement, called in character movement
                                             //(ik bouncing around between character and event controllers is weird, just planning for water>air
-                                            //event stuff later
-
+                                            //event stuff
         airFlockManager.enabled = true;
+        uiManager.SwitchIndicatorAir();
+        uiManager.flockTargetSize = 10;
+    }
+
+    public void airBarrier()
+    {
+        //if (airBarrierTargetFlockSize)
     }
 }
 
