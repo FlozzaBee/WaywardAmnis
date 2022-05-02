@@ -78,8 +78,8 @@ Material:
     m_Ints: []
     m_Floats:
     - Vector1_420FE989: 0.835
-    - Vector1_6CE7E547: 0.878
-    - Vector1_DC514302: 26
+    - Vector1_6CE7E547: 0.783
+    - Vector1_DC514302: 43
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -91,7 +91,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EnvironmentReflections: 1
-    - _Fresnel_Strength: 0.87
+    - _Fresnel_Strength: 0.42
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
