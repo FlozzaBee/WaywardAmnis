@@ -153,6 +153,11 @@ public class CharacterMovement : MonoBehaviour
         {
             eventManager.AirMovementTrigger();
         }//switches to air movement
+
+        if (other.tag == "TreeTrigger")
+        {
+            eventManager.TreeBarrierEvent(other);
+        }
     }
 
     //haptic controller 

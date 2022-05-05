@@ -31,8 +31,12 @@ public class EventManager : MonoBehaviour
     [Header("Air Initialise")]
     public AirFlockManager airFlockManager;
 
-    [Header("Air Barrier")]
-    public int airBarrierTargetFlockSize;
+    [Header("Tree Barrier")]
+    public int TreeTargetFlockSize;
+    public Animator treeAnimator;
+    public GameObject treeEventTarget;
+    public float treeAnimTime;
+
     
     void Update()
     {
@@ -137,12 +141,32 @@ public class EventManager : MonoBehaviour
                                             //event stuff
         airFlockManager.enabled = true;
         uiManager.SwitchIndicatorAir();
-        uiManager.flockTargetSize = 10;
+        uiManager.flockTargetSize = TreeTargetFlockSize;
     }
 
-    public void airBarrier()
+    public void TreeBarrierEvent(Collider trigger)
     {
-        //if (airBarrierTargetFlockSize)
+        if (airFlockManager.playerFlockSize < TreeTargetFlockSize)
+        {
+            uiManager.IndicatorShake();
+        }
+        else
+        {
+            airFlockManager.eventTransform = treeEventTarget.transform;
+            airFlockManager.eventInProgress = true;
+            treeAnimator.SetTrigger("TreeFall");
+            cinemachinceSwitch.SwitchState("Event3");
+            trigger.enabled = false;
+            StartCoroutine(WaitForTreeEvent(2));
+        }    
+    }
+
+    IEnumerator WaitForTreeEvent(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        airFlockManager.eventInProgress = false;
+        uiManager.flockTargetSize = 20; //20 is temp, replace with next barrier requirement
+        cinemachinceSwitch.SwitchState(null);
     }
 }
 
