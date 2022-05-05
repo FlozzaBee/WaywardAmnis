@@ -6,6 +6,7 @@ public class EventManager : MonoBehaviour
 {
     public UIManager uiManager;
     public CharacterMovement characterMovement;
+    public CinemachineSwitch cinemachinceSwitch;
 
     [Header("Building fall event")]
     public FlockManager flockManager;
@@ -69,6 +70,7 @@ public class EventManager : MonoBehaviour
             flockManager.eventTransform = buildingFallAgentTarget.transform;
             flockManager.eventInProgress = true;
             StartCoroutine(WaitForBuildingFall(buildingAnimTime));
+            cinemachinceSwitch.SwitchState("Event1");
             trigger.enabled = false;
         }
     }
@@ -82,6 +84,7 @@ public class EventManager : MonoBehaviour
             animator.SetBool("IsFallTrigger", true); //sets the IsFallTriggre on the building animators after a certain amount of seconds
         }
         uiManager.flockTargetSize = SharkFlockSizeTarget;
+        cinemachinceSwitch.SwitchState(null);
     }
 
     public void SharkEvent(Collider trigger) //called through CharacterMovement
@@ -102,6 +105,7 @@ public class EventManager : MonoBehaviour
             shark.GetComponent<Animator>().SetTrigger("SharkFleeTrigger");
             StartCoroutine(WaitForSharkEvent(1));
             StartCoroutine(WaitForSharkBarrier(3));
+            cinemachinceSwitch.SwitchState("Event2");
             trigger.enabled = false;
         }
     }
@@ -123,6 +127,7 @@ public class EventManager : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         sharkBarrier.SetActive(false);
         uiManager.indicatorOutro();
+        cinemachinceSwitch.SwitchState(null);
     }
 
     public void AirMovementTrigger()
