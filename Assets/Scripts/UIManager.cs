@@ -83,7 +83,7 @@ public class UIManager : MonoBehaviour
     IEnumerator waitForInitialize(float animationTime)
     {
         yield return new WaitForSeconds(animationTime);
-        indicatorAmount = flockManager.playerFlockSize / flockTargetSize;
+        indicatorAmount = playerFlockSize / flockTargetSize;
     }
 
     public void IndicatorFilled()

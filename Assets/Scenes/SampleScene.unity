@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.5266413, g: 0.5171311, b: 0.8206712, a: 1}
+  m_IndirectSpecularColor: {r: 0.52664036, g: 0.5171304, b: 0.82066983, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4046,6 +4046,11 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4090833816599141192, guid: 7b38321f7bb4ed74a97bb7be11b06f4c, type: 3}
+--- !u!198 &407544258 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4231632787581451317, guid: 76006ae721f74aa4e9c32d0abf797088, type: 3}
+  m_PrefabInstance: {fileID: 1154773984}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &409052443 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6228760443382524406, guid: d73fa0ea1aab4ae4481be3fbf54cff37, type: 3}
@@ -6610,7 +6615,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -319.7, y: -122.6}
+  m_AnchoredPosition: {x: -190.1, y: -40.4}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &728578485
@@ -6858,6 +6863,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 8891e36fd3100d149ac23148e5f86cb7, type: 3}
       propertyPath: m_Name
       value: TreeTop
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8891e36fd3100d149ac23148e5f86cb7, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8891e36fd3100d149ac23148e5f86cb7, type: 3}
@@ -10612,6 +10621,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2907311245883767007, guid: 01a18e1fe89228648874a16eedfc74dc, type: 3}
   m_PrefabInstance: {fileID: 1151929872}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1154773984
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 226164754}
+    m_Modifications:
+    - target: {fileID: 4231632787581451320, guid: 76006ae721f74aa4e9c32d0abf797088, type: 3}
+      propertyPath: m_Name
+      value: AmbientParticles
+      objectReference: {fileID: 0}
+    - target: {fileID: 4231632787581451323, guid: 76006ae721f74aa4e9c32d0abf797088, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4231632787581451323, guid: 76006ae721f74aa4e9c32d0abf797088, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4231632787581451323, guid: 76006ae721f74aa4e9c32d0abf797088, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4231632787581451323, guid: 76006ae721f74aa4e9c32d0abf797088, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4231632787581451323, guid: 76006ae721f74aa4e9c32d0abf797088, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4231632787581451323, guid: 76006ae721f74aa4e9c32d0abf797088, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4231632787581451323, guid: 76006ae721f74aa4e9c32d0abf797088, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4231632787581451323, guid: 76006ae721f74aa4e9c32d0abf797088, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4231632787581451323, guid: 76006ae721f74aa4e9c32d0abf797088, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4231632787581451323, guid: 76006ae721f74aa4e9c32d0abf797088, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4231632787581451323, guid: 76006ae721f74aa4e9c32d0abf797088, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 76006ae721f74aa4e9c32d0abf797088, type: 3}
 --- !u!1001 &1159305001
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12506,7 +12572,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7772474, y: 1}
+    m_SensorSize: {x: 1.7786459, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -12776,6 +12842,7 @@ MonoBehaviour:
   sharkBarrier: {fileID: 814259843}
   sharkAttackFleeDuration: 1
   airFlockManager: {fileID: 266256023}
+  ambientParticles: {fileID: 407544258}
   TreeTargetFlockSize: 12
   treeAnimator: {fileID: 1571704494}
   treeEventTarget: {fileID: 282446558}
@@ -21149,6 +21216,10 @@ PrefabInstance:
     - target: {fileID: 8361072568636182401, guid: 4f92b22bab52af84ab72f7a9686aea9a, type: 3}
       propertyPath: m_Name
       value: TreeBottom
+      objectReference: {fileID: 0}
+    - target: {fileID: 8361072568636182401, guid: 4f92b22bab52af84ab72f7a9686aea9a, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 9170366365039777083, guid: 4f92b22bab52af84ab72f7a9686aea9a, type: 3}
       propertyPath: m_RootOrder

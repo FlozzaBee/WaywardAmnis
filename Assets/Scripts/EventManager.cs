@@ -30,6 +30,7 @@ public class EventManager : MonoBehaviour
 
     [Header("Air Initialise")]
     public AirFlockManager airFlockManager;
+    public ParticleSystem ambientParticles;
 
     [Header("Tree Barrier")]
     public int TreeTargetFlockSize;
@@ -142,6 +143,7 @@ public class EventManager : MonoBehaviour
         airFlockManager.enabled = true;
         uiManager.SwitchIndicatorAir();
         uiManager.flockTargetSize = TreeTargetFlockSize;
+        ambientParticles.gameObject.SetActive(false);
     }
 
     public void TreeBarrierEvent(Collider trigger)
