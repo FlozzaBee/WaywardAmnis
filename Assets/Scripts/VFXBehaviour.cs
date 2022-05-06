@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FogBehaviour : MonoBehaviour
+public class VFXBehaviour : MonoBehaviour
 {
     public Color startColour;
     public Color EndColour;
