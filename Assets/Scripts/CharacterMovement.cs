@@ -128,7 +128,7 @@ public class CharacterMovement : MonoBehaviour
 
     private void LateUpdate()
     {
-        //z axis constraining
+        //z axis constraining aka marvin stopper 
         transform.position = new Vector3(transform.position.x, transform.position.y, marvinStopper);
     }
 
