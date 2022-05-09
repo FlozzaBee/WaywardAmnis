@@ -38,6 +38,9 @@ public class EventManager : MonoBehaviour
     public GameObject treeEventTarget;
     public float treeAnimTime;
 
+    [Header("Water Collision")]
+    private float turnVelocity; //smmoothdamp ref
+    public float turnTime = 1f;
     
     void Update()
     {
@@ -98,7 +101,7 @@ public class EventManager : MonoBehaviour
         {
             uiManager.IndicatorShake(); //calls the indicator shake animation thorugh the ui manager
             characterMovement.playerControl = false;
-            characterMovement.eventDirection = new Vector3(0, -1, 0);
+            characterMovement.eventDirection = -90;
             StartCoroutine(waitForEventMovement(sharkAttackFleeDuration));
         }
 
@@ -169,6 +172,18 @@ public class EventManager : MonoBehaviour
         airFlockManager.eventInProgress = false;
         uiManager.flockTargetSize = 20; //20 is temp, replace with next barrier requirement
         cinemachinceSwitch.SwitchState(null);
+    }
+
+    public void WaterCollisionEnter()
+    {
+        
+        characterMovement.playerControl = false;
+        characterMovement.eventDirection = 90f;
+        Debug.Log(characterMovement.eventDirection);
+    }
+    public void WaterCollisionExit()
+    {
+        StartCoroutine(waitForEventMovement(0.2f));
     }
 }
 

@@ -11,6 +11,7 @@ TagManager:
   - AirMovementTrigger
   - AirFlockAgent
   - TreeTrigger
+  - WaterTrigger
   layers:
   - Default
   - TransparentFX

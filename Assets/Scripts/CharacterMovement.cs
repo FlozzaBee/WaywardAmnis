@@ -11,6 +11,7 @@ public class CharacterMovement : MonoBehaviour
     public FlockManager flockManager;
     public UIManager uiManager;
     public Animator anim;
+    
 
     public int movementType = 0; //0 = water, 1 = air, 2 = land //public for debug only
 
@@ -57,7 +58,7 @@ public class CharacterMovement : MonoBehaviour
     [HideInInspector]
     public bool playerControl = true;
     [HideInInspector]
-    public Vector3 eventDirection;
+    public float eventDirection;
 
 
 
@@ -96,7 +97,10 @@ public class CharacterMovement : MonoBehaviour
 
         else
         {
-            direction = eventDirection; //while player control disabled, direction is controlled by the event manager
+            float angle = transform.eulerAngles.z;
+            angle = Mathf.SmoothDampAngle(angle, eventDirection, ref turnSmoothVelocity, 0.15f);
+            Vector3 eventVector = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle), 0);
+            direction = eventVector; //while player control disabled, direction is controlled by the event manager
         }
         if (movementType == 0)
         {
@@ -158,7 +162,22 @@ public class CharacterMovement : MonoBehaviour
         {
             eventManager.TreeBarrierEvent(other);
         }
+
+        if (other.tag == "WaterTrigger")
+        {
+            eventManager.WaterCollisionEnter();
+        }
+        
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "WaterTrigger")
+        {
+            eventManager.WaterCollisionExit();
+        }
+    }
+
 
     //haptic controller 
 
