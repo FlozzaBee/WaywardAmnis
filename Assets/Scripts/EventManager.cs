@@ -143,6 +143,7 @@ public class EventManager : MonoBehaviour
         characterMovement.movementType = 1; //sets movement type to air movement, called in character movement
                                             //(ik bouncing around between character and event controllers is weird, just planning for water>air
                                             //event stuff
+        characterMovement.anim.SetBool("Flightcheck", true); //Player Character enables transformation and flying animations, this manager is very based of you
         airFlockManager.enabled = true;
         uiManager.SwitchIndicatorAir();
         uiManager.flockTargetSize = TreeTargetFlockSize;

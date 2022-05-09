@@ -198,7 +198,7 @@ public class CharacterMovement : MonoBehaviour
             angle = transform.rotation.eulerAngles.z;
             targetSpeed = 0;
             direction = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle), 0); //calculates what direction ur facing
-            anim.SetBool("PlayerSmoving", false);
+            anim.SetBool("PlayerSmoving", false); //Idle animation enabled
         }
         waterSpeedCurrent = Mathf.SmoothDamp(waterSpeedCurrent, targetSpeed, ref waterSpeedRef, waterSpeedSmoothTime);
         controller.Move(direction * waterSpeedCurrent * Time.deltaTime);
@@ -221,6 +221,7 @@ public class CharacterMovement : MonoBehaviour
             targetSpeed = airSpeed; //assigns target speed to in motion speed
 
             anim.SetFloat("AnimSpeedMultiplier", 1); //resets anim speed mult to 1 after idle.
+             anim.SetBool("PlayerSmoving", true); //Moving animation enabled
         }
         else
         {
@@ -238,6 +239,7 @@ public class CharacterMovement : MonoBehaviour
             direction = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle), 0);
 
             anim.SetFloat("AnimSpeedMultiplier", airIdleAnimMultiplier); // slows corns movement animation by multiplier while idle
+            anim.SetBool("PlayerSmoving", false); //Idle animation enabled 
 
             //raycast stuff to make the player turn if they idle hit a wall
             RaycastHit hitRight;
