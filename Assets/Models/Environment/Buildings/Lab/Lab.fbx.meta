@@ -39,7 +39,37 @@ ModelImporter:
   - first:
       74: -993472700140489722
     second: Cube.011|Cylinder.001Action.001
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lab_Glass
+    second: {fileID: 2100000, guid: 0d1a97e66414a64458e8c90ce39e4266, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lab_Lamp
+    second: {fileID: 2100000, guid: 9a9c9afb06e151947ac8334490368af3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lab_Metal
+    second: {fileID: 2100000, guid: c4e205df901ea5b43986453749635390, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lab_Metal2
+    second: {fileID: 2100000, guid: b95c35ccb7123c24bac9905699fca6ad, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lab_Wall
+    second: {fileID: 2100000, guid: 2b80aa9df901f2f47b3e836c1e61dfb0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lab_wall2
+    second: {fileID: 2100000, guid: 0678c324f04119e47ab47fa48105d68a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
