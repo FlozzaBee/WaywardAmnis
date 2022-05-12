@@ -22,7 +22,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Ocean
   m_Shader: {fileID: -6465566751694194690, guid: b85c5e2c0d0c9774ab24e77078fc44cb, type: 3}
-  m_ShaderKeywords: FOAM_SHADOWS_ON INTERSECTION_EFFECTS_ON WORLD_SPACE_UV_ON
+  m_ShaderKeywords: FOAM_SHADOWS_ON INTERSECTION_EFFECTS_ON SURFACE_FOAM_ON WATER_LIGHTING_ON
+    WORLD_SPACE_UV_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -69,7 +70,7 @@ Material:
     - FOAM_SHADOWS: 1
     - INTERSECTION_EFFECTS: 1
     - SHORE_MOVEMENT: 0
-    - SURFACE_FOAM: 0
+    - SURFACE_FOAM: 1
     - WATER_LIGHTING: 1
     - WORLD_SPACE_UV: 1
     - _CausticsDepth: 0.6
@@ -81,7 +82,7 @@ Material:
     - _FoamShadowDepth: 10
     - _FoamShadowStrength: 0.45
     - _IntersectionFoamBlend: 1
-    - _IntersectionFoamDepth: 0.72
+    - _IntersectionFoamDepth: 30
     - _IntersectionFoamScale: 0.19
     - _IntersectionFoamShadowProjection: 4.6
     - _IntersectionWaterBlend: 0
@@ -109,7 +110,7 @@ Material:
     - _WaterColorDepth: 0.8
     - _WaterColorHorizonDistance: 20
     m_Colors:
-    - _IntersectionFoamColor: {r: 1, g: 1, b: 1, a: 1}
+    - _IntersectionFoamColor: {r: 1, g: 0, b: 0, a: 1}
     - _IntersectionFoamMovement: {r: 0, g: 0, b: 0, a: 0}
     - _IntersectionFoamSampling: {r: 1, g: 0, b: 0, a: 0}
     - _LightingDiffuseColor: {r: 0, g: 0, b: 0, a: 0}
@@ -124,8 +125,8 @@ Material:
     - _WaterColorDeep: {r: 0.01176471, g: 0.28624168, b: 0.50980073, a: 1}
     - _WaterColorHorizon: {r: 0, g: 0.22741818, b: 0.8, a: 1}
     - _WaterColorShallow: {r: 0, g: 0.7725491, b: 0.62352943, a: 0.5019608}
-    - _WaterColorUnderwater: {r: 0.20389047, g: 0.30977106, b: 0.517647, a: 0}
+    - _WaterColorUnderwater: {r: 0, g: 0.5590614, b: 0.7735849, a: 1}
     - _WaveColor: {r: 0, g: 0, b: 0, a: 0}
     - _WaveDirections: {r: 0, g: 0.64, b: 1, a: 0.33}
-    - _WaveVisuals: {r: 0.132, g: 7.9, b: 1.38, a: 0}
+    - _WaveVisuals: {r: 0.132, g: 10, b: 1.38, a: 0}
   m_BuildTextureStacks: []
