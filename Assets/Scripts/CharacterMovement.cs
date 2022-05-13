@@ -11,6 +11,8 @@ public class CharacterMovement : MonoBehaviour
     public FlockManager flockManager;
     public UIManager uiManager;
     public Animator anim;
+
+    
     
 
     public int movementType = 0; //0 = water, 1 = air, 2 = land //public for debug only
@@ -40,12 +42,18 @@ public class CharacterMovement : MonoBehaviour
     public float lightRumbleStrength;
     public float lightVibrateDuration;
 
+    [Header("MiscDebug")]
+    [Range(5,120)]
+    public int targetFrameRate = 60;
+
     [Header("ControllerDebug")]
     public bool controllerDebug = false;
     [Range(0, 1)]
     public float vibrationLowFreq = 0;
     [Range(0, 1)]
     public float vibrationHighFreq = 0;
+
+    
 
     private float turnSmoothVelocity;
     private float turnSmoothVelocity1;
@@ -60,10 +68,12 @@ public class CharacterMovement : MonoBehaviour
     [HideInInspector]
     public float eventDirection;
 
-
+    
 
     private void Start()
     {
+        QualitySettings.vSyncCount = 0; //for testing framerate dependency, remove before ship
+
         marvinStopper = transform.position.z;
 
         /*for (int i = 0; i < InputSystem.devices.Count; i++)
@@ -85,6 +95,8 @@ public class CharacterMovement : MonoBehaviour
 
     void Update()
     {
+        Application.targetFrameRate = targetFrameRate; //for testing framerate dependency, remove before ship
+
         Vector3 direction = Vector3.zero;
         if (playerControl == true) // player control is disabled by some events
         {
@@ -100,13 +112,15 @@ public class CharacterMovement : MonoBehaviour
             float angle = transform.eulerAngles.z;
             angle = Mathf.SmoothDampAngle(angle, eventDirection, ref turnSmoothVelocity, 0.15f);
             Vector3 eventVector = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle), 0);
-            direction = eventVector; //while player control disabled, direction is controlled by the event manager
+            transform.rotation = Quaternion.Euler(0, 0, angle);
+            controller.Move(eventVector * speed * Time.deltaTime);
+            //while player control disabled, direction is controlled by the event manager
         }
-        if (movementType == 0)
+        if (movementType == 0 && playerControl == true)
         {
             PlayerMovement(direction);
         }
-        if (movementType == 1)
+        if (movementType == 1 && playerControl == true)
         {
             PlayerMovementAir(direction);
         }
@@ -250,7 +264,7 @@ public class CharacterMovement : MonoBehaviour
                 StartCoroutine(WaitForIdleTurn(1.5f));
                 //Debug.Log("right ray " + hitRight.collider.gameObject);
                 //Debug.Log("right ray " + hitRight.distance);
-                Debug.DrawRay(transform.position, (new Vector3(1, 0, 0) * 100), Color.magenta, 1);
+                Debug.DrawRay(transform.position, (new Vector3(1, 0, 0) * airWallCollisionDist), Color.magenta, 1);
             }
 
             RaycastHit hitLeft;
@@ -261,7 +275,7 @@ public class CharacterMovement : MonoBehaviour
                 StartCoroutine(WaitForIdleTurn(1.5f));
                 //Debug.Log("left ray " + hitLeft.collider.gameObject);
                 //Debug.Log("left ray " + hitLeft.distance);
-                Debug.DrawRay(transform.position, new Vector3(-1, 0, 0) * 100, Color.cyan, 1);
+                Debug.DrawRay(transform.position, new Vector3(-1, 0, 0) * airWallCollisionDist, Color.cyan, 1);
             }
         }
 
