@@ -8,6 +8,8 @@ public class EventManager : MonoBehaviour
     public CharacterMovement characterMovement;
     public CinemachineSwitch cinemachinceSwitch;
 
+    private GameObject eventFollowObject;
+
     [Header("Building fall event")]
     public FlockManager flockManager;
     public Animator[] BuildingAnim;
@@ -41,6 +43,11 @@ public class EventManager : MonoBehaviour
     [Header("Water Collision")]
     private float turnVelocity; //smmoothdamp ref
     public float turnTime = 1f;
+
+    [Header("Hawk Event")]
+    public GameObject hawk;
+    public GameObject hawkBarrier;
+    private bool hawkFollow = false;
     
     void Update()
     {
@@ -58,6 +65,11 @@ public class EventManager : MonoBehaviour
             flockManager.eventTransform = shark.transform;
             Debug.Log("shark event should be happening");
         } //tells the boids where the shark is for shark event. 
+
+        if (hawkFollow == true)
+        {
+            airFlockManager.eventTransform = hawk.transform;
+        }
 
     }
     public void DoorOpenAnimation() //animation classes are called in ontriggerenter in the character movement scripts.
@@ -108,6 +120,7 @@ public class EventManager : MonoBehaviour
         else
         {
             sharkFollow = true;
+            eventFollowObject = shark;
             flockManager.eventInProgress = true;
             flockManager.playerFlockSize = 0;
             shark.GetComponent<Animator>().SetTrigger("SharkFleeTrigger");
@@ -182,9 +195,41 @@ public class EventManager : MonoBehaviour
         characterMovement.eventDirection = 90f;
         Debug.Log(characterMovement.eventDirection);
     }
+
     public void WaterCollisionExit()
     {
         StartCoroutine(waitForEventMovement(0.2f));
+    }
+
+    public void HawkEvent(Collider trigger)
+    {
+        if (airFlockManager.playerFlockSize < uiManager.flockTargetSize)
+        {
+            uiManager.IndicatorShake();
+            characterMovement.playerControl = false;
+            characterMovement.eventDirection = 180;
+            StartCoroutine(waitForEventMovement(sharkAttackFleeDuration));
+        }
+
+        else
+        {
+            hawkFollow = true;
+            airFlockManager.eventInProgress = true;
+            eventFollowObject = hawk;
+            airFlockManager.playerFlockSize = 0;
+            hawk.GetComponent<Animator>().SetTrigger("HawkFleeTrigger"); 
+            cinemachinceSwitch.SwitchState("Event4"); //no event yet, 
+            StartCoroutine(WaitForHawkBarrier(3));
+            trigger.enabled = false;
+        }
+    }
+
+    IEnumerator WaitForHawkBarrier(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        hawkBarrier.SetActive(false);
+        uiManager.indicatorOutro();
+        cinemachinceSwitch.SwitchState(null);
     }
 }
 

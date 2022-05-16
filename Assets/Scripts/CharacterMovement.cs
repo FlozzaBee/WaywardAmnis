@@ -37,6 +37,15 @@ public class CharacterMovement : MonoBehaviour
     private bool isIdleTurning = false;
     private LayerMask layerMask;
 
+    [Header("Land Movement Settings")]
+    public float landSpeed = 10f;
+    public float landSpeedSmoothTime = 0.25f;
+    public float gravity = 9.81f;
+    private float landSpeedCurrent;
+    private float landSpeedRef;
+    private float verSpeed;
+    
+
     [Header("HapticSettings")]
     [Range(0, 1)]
     public float lightRumbleStrength;
@@ -124,6 +133,10 @@ public class CharacterMovement : MonoBehaviour
         {
             PlayerMovementAir(direction);
         }
+        if (movementType == 2 && playerControl == true)
+        {
+            PlayerMovementLand(direction);
+        }
 
         if (Input.GetButtonDown("Escape"))
         {
@@ -180,6 +193,11 @@ public class CharacterMovement : MonoBehaviour
         if (other.tag == "WaterTrigger")
         {
             eventManager.WaterCollisionEnter();
+        }
+
+        if (other.tag == "HawkTrigger")
+        {
+            eventManager.HawkEvent(other);
         }
         
     }
@@ -282,6 +300,34 @@ public class CharacterMovement : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, 0f, angle);
         airCurrentSpeed = Mathf.SmoothDamp(airCurrentSpeed, targetSpeed, ref airSpeedRef, airSpeedSmoothTime);
         controller.Move(direction * airCurrentSpeed * Time.deltaTime);
+    }
+
+    private void PlayerMovementLand(Vector3 direction)
+    {
+        Vector3 directionLand;
+        float targetSpeed;
+        if (direction.sqrMagnitude >= 0.1f)
+        {
+            targetSpeed = speed;
+            anim.SetBool("PlayerSmoving", true); //Moving animation enabled
+        }
+        else
+        {
+            targetSpeed = 0;
+            anim.SetBool("PlayerSmoving", false); //Idle animation enabled
+        }
+        landSpeedCurrent = Mathf.SmoothDamp(landSpeedCurrent, targetSpeed, ref landSpeedRef, landSpeedCurrent);
+
+        if (controller.isGrounded == true)
+        {
+            verSpeed = 0;
+        }
+        verSpeed -= gravity * Time.deltaTime;
+        directionLand = new Vector3(direction.x * landSpeedCurrent * Time.deltaTime, verSpeed, 0);
+
+        controller.Move(directionLand);
+
+        Debug.Log("isGounded " + controller.isGrounded);
     }
 
     public void ControllerRumbleLight()

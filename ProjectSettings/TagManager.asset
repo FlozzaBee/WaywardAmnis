@@ -12,6 +12,7 @@ TagManager:
   - AirFlockAgent
   - TreeTrigger
   - WaterTrigger
+  - HawkTrigger
   layers:
   - Default
   - TransparentFX
