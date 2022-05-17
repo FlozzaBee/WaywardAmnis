@@ -124,7 +124,7 @@ public class CharacterMovement : MonoBehaviour
         else
         {
             float angle = transform.eulerAngles.z;
-            angle = Mathf.SmoothDampAngle(angle, eventDirection, ref turnSmoothVelocity, 0.15f);
+            angle = Mathf.SmoothDampAngle(angle, eventDirection, ref turnSmoothVelocity, 0.3f);
             Vector3 eventVector = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle), 0);
             transform.rotation = Quaternion.Euler(0, 0, angle);
             controller.Move(eventVector * speed * Time.deltaTime);

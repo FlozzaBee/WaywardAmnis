@@ -71,6 +71,20 @@ public class EventManager : MonoBehaviour
             airFlockManager.eventTransform = hawk.transform;
         }
 
+        //debuggies
+        /*if (Input.GetKeyDown(KeyCode.H))
+        {
+            HawkEvent(null);
+        }
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            float normalizedTime = hawk.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime;
+            normalizedTime -= Mathf.Floor(normalizedTime);
+            normalizedTime = normalizedTime * hawk.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length;
+            normalizedTime = hawk.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length - normalizedTime;
+            Debug.Log(normalizedTime);
+        }*/
+
     }
     public void DoorOpenAnimation() //animation classes are called in ontriggerenter in the character movement scripts.
     {
@@ -208,6 +222,7 @@ public class EventManager : MonoBehaviour
             uiManager.IndicatorShake();
             characterMovement.playerControl = false;
             characterMovement.eventDirection = 180;
+            
             StartCoroutine(waitForEventMovement(sharkAttackFleeDuration));
         }
 
@@ -219,10 +234,16 @@ public class EventManager : MonoBehaviour
             airFlockManager.playerFlockSize = 0;
             hawk.GetComponent<Animator>().SetTrigger("HawkFleeTrigger"); 
             cinemachinceSwitch.SwitchState("Event4"); //no event yet, 
-            StartCoroutine(WaitForHawkBarrier(3));
+            float normalizedTime = hawk.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime;
+            normalizedTime -= Mathf.Floor(normalizedTime);
+            normalizedTime = normalizedTime * hawk.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length;
+            normalizedTime = hawk.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length - normalizedTime;
+            StartCoroutine(WaitForHawkBarrier(normalizedTime));
             trigger.enabled = false;
         }
     }
+
+
 
     IEnumerator WaitForHawkBarrier(float waitTime)
     {

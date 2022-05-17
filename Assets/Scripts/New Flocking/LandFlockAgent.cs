@@ -56,16 +56,6 @@ public class LandFlockAgent : MonoBehaviour
             angle = Mathf.SmoothDampAngle(angle, 0, ref turnSmoothRef, turnSmoothTime);
         }
         transform.rotation = Quaternion.Euler(0, angle, 0);
-
-        //animation
-        if (moveVector.sqrMagnitude > 0.05f)
-        {
-            anim.SetBool("isWalking", true);
-        }
-        if (moveVector.sqrMagnitude < 0.01f)
-        {
-            anim.SetBool("isWalking", false);
-        }
     }
     private Vector3 CalculateDirection(Vector3 targetPosition)
     {
@@ -77,11 +67,13 @@ public class LandFlockAgent : MonoBehaviour
             movementDirection -= transform.position;
             if (movementDirection.sqrMagnitude > moveThreshold)
             {
+                
                 //Debug.Log(movementDirection.normalized.x);
                 return movementDirection.normalized;
             }
             else
             {
+                
                 return Vector3.zero; 
             }
             
@@ -90,6 +82,16 @@ public class LandFlockAgent : MonoBehaviour
         else { return movementDirection; }
     }
 
+    //animation
+    public void Walking(bool isWalking)
+    {
+        if (isWalking == true && isInPlayerFlock == true)
+        anim.SetBool("isWalking", true);
+        else
+        {
+            anim.SetBool("isWalking", false);
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "PlayerLand" && isInPlayerFlock == false)

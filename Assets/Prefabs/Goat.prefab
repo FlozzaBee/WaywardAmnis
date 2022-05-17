@@ -150,7 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gravity: 3
   moveThreshold: 1
-  speed: 9
+  speed: 7
   turnSmoothTime: 0.26
 --- !u!143 &5958623987150259689
 CharacterController:
