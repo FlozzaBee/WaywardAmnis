@@ -41,10 +41,15 @@ public class CharacterMovement : MonoBehaviour
     public float landSpeed = 10f;
     public float landSpeedSmoothTime = 0.25f;
     public float gravity = 9.81f;
+    public float landTurnSmoothTime = 0.2f;
     private float landSpeedCurrent;
     private float landSpeedRef;
     private float verSpeed;
-    
+    private bool leftFacing;
+    private float landSmoothTurnRef;
+    private bool zLeveled = false;
+    private float landZTurnRef;
+
 
     [Header("HapticSettings")]
     [Range(0, 1)]
@@ -199,6 +204,11 @@ public class CharacterMovement : MonoBehaviour
         {
             eventManager.HawkEvent(other);
         }
+
+        if (other.tag == "LandMovementTrigger")
+        {
+            eventManager.LandMovementTrigger();
+        }
         
     }
 
@@ -327,7 +337,41 @@ public class CharacterMovement : MonoBehaviour
 
         controller.Move(directionLand);
 
-        Debug.Log("isGounded " + controller.isGrounded);
+        //Direction switching
+        if (direction.x < 0)
+        {
+            leftFacing = true;
+        }
+        if (direction.x > 0)
+        {
+            leftFacing = false;
+        }
+        float angle = transform.rotation.eulerAngles.y;
+        if (leftFacing == true)
+        {
+            angle = Mathf.SmoothDampAngle(angle, 180, ref landSmoothTurnRef, landTurnSmoothTime);
+        }
+        if (leftFacing == false)
+        {
+            angle = Mathf.SmoothDampAngle(angle, 0, ref landSmoothTurnRef, landTurnSmoothTime);
+        }
+        //transform.rotation = Quaternion.Euler(0, angle, 0);
+
+        //initial z axis leveling rotation
+        if (zLeveled == false)
+        {
+            float angleZ = transform.rotation.eulerAngles.z;
+            angleZ = Mathf.SmoothDampAngle(angleZ, 0, ref landZTurnRef, 0.25f);
+            transform.rotation = Quaternion.Euler(0, angle, angleZ);
+            if (angleZ == 0)
+            {
+                zLeveled = true;
+            }
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0, angle, 0);
+        }
     }
 
     public void ControllerRumbleLight()

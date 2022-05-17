@@ -231,6 +231,16 @@ public class EventManager : MonoBehaviour
         uiManager.indicatorOutro();
         cinemachinceSwitch.SwitchState(null);
     }
+
+    public void LandMovementTrigger()
+    {
+        characterMovement.movementType = 2; //switches to land movement 
+        airFlockManager.enabled = false; //disables birds for performance
+        //ui siwtch? might not be needed 
+        //characterMovement.anim.SetBool("LandCheck", true); //temp space for corns animation, doesn't do anything yet
+        cinemachinceSwitch.SwitchState("PlayerFollow2");
+
+    }
 }
 
 

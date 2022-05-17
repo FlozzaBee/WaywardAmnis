@@ -13,6 +13,9 @@ TagManager:
   - TreeTrigger
   - WaterTrigger
   - HawkTrigger
+  - LandMovementTrigger
+  - LandFlockAgent
+  - PlayerLand
   layers:
   - Default
   - TransparentFX
@@ -21,7 +24,7 @@ TagManager:
   - Water
   - UI
   - Wall
-  - 
+  - Goat
   - 
   - 
   - 
