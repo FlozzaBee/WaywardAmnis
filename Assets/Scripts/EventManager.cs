@@ -7,6 +7,7 @@ public class EventManager : MonoBehaviour
     public UIManager uiManager;
     public CharacterMovement characterMovement;
     public CinemachineSwitch cinemachinceSwitch;
+    public CameraZoom cameraZoom;
 
     private GameObject eventFollowObject;
 
@@ -48,6 +49,9 @@ public class EventManager : MonoBehaviour
     public GameObject hawk;
     public GameObject hawkBarrier;
     private bool hawkFollow = false;
+
+    [Header("End Event")]
+    public LandFlockManager landFlockManager;
     
     void Update()
     {
@@ -260,7 +264,21 @@ public class EventManager : MonoBehaviour
         //ui siwtch? might not be needed 
         //characterMovement.anim.SetBool("LandCheck", true); //temp space for corns animation, doesn't do anything yet
         cinemachinceSwitch.SwitchState("PlayerFollow2");
+    }
 
+    public void EndEvent()
+    {
+        characterMovement.playerControl = false;
+        characterMovement.isEnding = true;
+        landFlockManager.isEnding = true;
+        //transform player to communication mode here
+        StartCoroutine(WaitForZoomOut(2));
+    }
+
+    IEnumerator WaitForZoomOut(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        cameraZoom.ZoomOut();
     }
 }
 

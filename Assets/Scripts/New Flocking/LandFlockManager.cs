@@ -14,6 +14,9 @@ public class LandFlockManager : MonoBehaviour
 
     public float animSpeedMin = 0.9f;
     public float animSpeedMax = 1.1f;
+
+    public bool isEnding = false;
+    private bool isEndingWalking = true;
     private void Awake()
     {
         agentList = GameObject.FindGameObjectsWithTag("LandFlockAgent"); //finds all agents and adds them to agentList array
@@ -33,20 +36,49 @@ public class LandFlockManager : MonoBehaviour
     private void Update()
     {
         Vector3 playerVector = player.transform.position;
-
-        for (int i = 0; i < agentScripts.Length; i++)
+        if (isEnding == false)
         {
-            Vector3 playerVectorRandomised;
-            playerVectorRandomised = playerVector + randomiseTargetVector[i];
-            agentScripts[i].moveAgent(playerVectorRandomised);
-            if (Input.GetAxisRaw("Horizontal") != 0)
+            for (int i = 0; i < agentScripts.Length; i++)
             {
-                agentScripts[i].Walking(true);
+                Vector3 playerVectorRandomised;
+                playerVectorRandomised = playerVector + randomiseTargetVector[i];
+                agentScripts[i].moveAgent(playerVectorRandomised);
+                if (Input.GetAxisRaw("Horizontal") != 0)
+                {
+                    agentScripts[i].Walking(true);
+                }
+                else
+                {
+                    agentScripts[i].Walking(false);
+                }
+            }
+        }
+        if (isEnding)
+        {
+            if (isEndingWalking)
+            {
+                for (int i = 0; i < agentScripts.Length; i++)
+                {
+                    Vector3 playerVectorRandomised;
+                    playerVectorRandomised = playerVector + randomiseTargetVector[i];
+                    agentScripts[i].moveAgent(playerVectorRandomised);
+                    agentScripts[i].Walking(true);
+                }
+                StartCoroutine(Ending(2));
             }
             else
             {
-                agentScripts[i].Walking(false);
+                for (int i = 0; i < agentScripts.Length; i++)
+                {
+                    agentScripts[i].Walking(false);
+                }
             }
         }
+    }
+
+    IEnumerator Ending(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        isEndingWalking = false;
     }
 }

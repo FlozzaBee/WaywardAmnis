@@ -11,15 +11,21 @@ public class VFXBehaviour : MonoBehaviour
     public float minDepth;
     public GameObject player;
 
+    [Header("Altered by EventManager")]
+    public bool enableFogChanger = true;
+
     private Color currentColour;
     void Update()
     {
-        float zFraction;
-        zFraction = player.transform.position.y / minDepth;
-        currentColour = Color.Lerp(startColour, EndColour, zFraction);
-        m.SetColor("Color_B270E39F", currentColour);
-        //Debug.Log("Colour " + currentColour);
-        //Debug.Log("player " + player.transform.position.z + " min depth " + minDepth);
-        //Debug.Log("zFraction " + zFraction);
+        if (enableFogChanger)
+        {
+            float zFraction;
+            zFraction = player.transform.position.y / minDepth;
+            currentColour = Color.Lerp(startColour, EndColour, zFraction);
+            m.SetColor("Color_B270E39F", currentColour);
+            //Debug.Log("Colour " + currentColour);
+            //Debug.Log("player " + player.transform.position.z + " min depth " + minDepth);
+            //Debug.Log("zFraction " + zFraction);
+        }
     }
 }

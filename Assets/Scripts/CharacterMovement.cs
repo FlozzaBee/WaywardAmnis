@@ -50,6 +50,17 @@ public class CharacterMovement : MonoBehaviour
     private bool zLeveled = false;
     private float landZTurnRef;
 
+    [Header("End Movement")]
+    public bool isEnding = false;
+    public GameObject endLocationTarget;
+    public float endSpeed = 5f;
+    public float moveThreshold = 0.1f;
+    
+
+    //fall debugging
+    private float fallTime = 0; 
+    private bool fell = false;
+
 
     [Header("HapticSettings")]
     [Range(0, 1)]
@@ -123,12 +134,20 @@ public class CharacterMovement : MonoBehaviour
 
         else
         {
-            float angle = transform.eulerAngles.z;
-            angle = Mathf.SmoothDampAngle(angle, eventDirection, ref turnSmoothVelocity, 0.3f);
-            Vector3 eventVector = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle), 0);
-            transform.rotation = Quaternion.Euler(0, 0, angle);
-            controller.Move(eventVector * speed * Time.deltaTime);
-            //while player control disabled, direction is controlled by the event manager
+            if (!isEnding)
+            {
+                float angle = transform.eulerAngles.z;
+                angle = Mathf.SmoothDampAngle(angle, eventDirection, ref turnSmoothVelocity, 0.3f);
+                Vector3 eventVector = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle), 0);
+                transform.rotation = Quaternion.Euler(0, 0, angle);
+                controller.Move(eventVector * speed * Time.deltaTime);
+                //while player control disabled, direction is controlled by the event manager
+            }
+            else
+            {
+                EndMovement();
+            }
+
         }
         if (movementType == 0 && playerControl == true)
         {
@@ -208,6 +227,11 @@ public class CharacterMovement : MonoBehaviour
         if (other.tag == "LandMovementTrigger")
         {
             eventManager.LandMovementTrigger();
+        }
+
+        if (other.tag == "EndTrigger")
+        {
+            eventManager.EndEvent();
         }
         
     }
@@ -333,9 +357,18 @@ public class CharacterMovement : MonoBehaviour
             verSpeed = 0;
         }
         verSpeed -= gravity * Time.deltaTime;
-        directionLand = new Vector3(direction.x * landSpeedCurrent * Time.deltaTime, verSpeed, 0);
+        directionLand = new Vector3(direction.x * landSpeedCurrent * Time.deltaTime, verSpeed * Time.deltaTime, 0);
 
         controller.Move(directionLand);
+
+        //fall speed debugging
+        fallTime += Time.deltaTime;
+
+        if (controller.isGrounded && !fell)
+        {
+            Debug.Log("Fall time: " + fallTime);
+            fell = true;
+        }
 
         //Direction switching
         if (direction.x < 0)
@@ -372,6 +405,37 @@ public class CharacterMovement : MonoBehaviour
         {
             transform.rotation = Quaternion.Euler(0, angle, 0);
         }
+    }
+
+    private void EndMovement()
+    {
+        Vector3 movementDirection;
+        movementDirection = Vector3.zero;
+
+        movementDirection += endLocationTarget.transform.position;
+        movementDirection -= transform.position;
+        if (movementDirection.sqrMagnitude > moveThreshold)
+        {
+
+            //Debug.Log(movementDirection.normalized.x);
+            movementDirection = movementDirection.normalized;
+        }
+        else
+        {
+
+            movementDirection = Vector3.zero;
+        }
+
+        //calc gravity
+        if (controller.isGrounded == true)
+        {
+            verSpeed = 0;
+        }
+        verSpeed -= gravity * Time.deltaTime;
+
+        Vector3 moveVector = new Vector3(movementDirection.x * Time.deltaTime * endSpeed, verSpeed, movementDirection.z * Time.deltaTime * endSpeed);
+
+        controller.Move(moveVector);
     }
 
     public void ControllerRumbleLight()

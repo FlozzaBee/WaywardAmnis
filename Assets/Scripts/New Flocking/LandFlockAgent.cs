@@ -5,8 +5,10 @@ using UnityEngine;
 public class LandFlockAgent : MonoBehaviour
 {
     public float gravity = 3f;
-    public float moveThreshold;
-    public float speed = 10;
+    public float moveThreshold = 0.1f;
+    public float fastSpeed = 10;
+    public float slowSpeed = 7;
+    private float speed = 10;
     public float turnSmoothTime = 0.25f;
 
     private bool isInPlayerFlock = false;
@@ -14,6 +16,10 @@ public class LandFlockAgent : MonoBehaviour
     private float vSpeed;
     private bool leftFacing = false;
     private float turnSmoothRef;
+    private bool _isWalking = false;
+    private bool slowWalking = false;
+
+    
 
     private Animator anim;
 
@@ -67,15 +73,31 @@ public class LandFlockAgent : MonoBehaviour
             movementDirection -= transform.position;
             if (movementDirection.sqrMagnitude > moveThreshold)
             {
-                
                 //Debug.Log(movementDirection.normalized.x);
                 return movementDirection.normalized;
             }
-            else
+            if (movementDirection.sqrMagnitude <= moveThreshold && slowWalking == false && _isWalking)
             {
+                speed = slowSpeed;
+                slowWalking = true;
+                StartCoroutine(SlowWalk(1));
+                return movementDirection.normalized;
                 
-                return Vector3.zero; 
             }
+            if (movementDirection.sqrMagnitude <= moveThreshold && slowWalking == true)
+            {
+                return Vector3.zero;
+            }
+            else { return Vector3.zero; }
+            /*else
+            {
+                if (!walkWaiting)
+                {
+                    StartCoroutine(WalkWait(1));
+                    walkWaiting = true;
+                }
+                return Vector3.zero;
+            }*/
             
         }//once the player collects the agent, the target is the players position (input in the class)
 
@@ -86,10 +108,14 @@ public class LandFlockAgent : MonoBehaviour
     public void Walking(bool isWalking)
     {
         if (isWalking == true && isInPlayerFlock == true)
-        anim.SetBool("isWalking", true);
+        {
+            anim.SetBool("isWalking", true);
+            _isWalking = isWalking;
+        }
         else
         {
             anim.SetBool("isWalking", false);
+            _isWalking = isWalking;
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -98,5 +124,13 @@ public class LandFlockAgent : MonoBehaviour
         {
             isInPlayerFlock = true;
         }
+    }
+
+    IEnumerator SlowWalk(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        speed = fastSpeed;
+        slowWalking = false;
+        Debug.Log("slowWalking");
     }
 }
