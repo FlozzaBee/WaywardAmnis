@@ -52,6 +52,7 @@ public class EventManager : MonoBehaviour
 
     [Header("End Event")]
     public LandFlockManager landFlockManager;
+    public Animator broadcastAnimator;
     
     void Update()
     {
@@ -272,7 +273,14 @@ public class EventManager : MonoBehaviour
         characterMovement.isEnding = true;
         landFlockManager.isEnding = true;
         //transform player to communication mode here
-        StartCoroutine(WaitForZoomOut(4));
+        StartCoroutine(WaitForBroadcast(6));
+        StartCoroutine(WaitForZoomOut(8));
+    }
+
+    IEnumerator WaitForBroadcast(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        broadcastAnimator.SetTrigger("BroadcastTrigger");
     }
 
     IEnumerator WaitForZoomOut(float waitTime)

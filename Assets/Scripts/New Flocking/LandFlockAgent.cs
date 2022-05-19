@@ -6,9 +6,10 @@ public class LandFlockAgent : MonoBehaviour
 {
     public float gravity = 3f;
     public float moveThreshold = 0.1f;
+    public float accelThreshold = 2f;
     public float fastSpeed = 10;
     public float slowSpeed = 7;
-    private float speed = 10;
+    public float speed;
     public float turnSmoothTime = 0.25f;
 
     private bool isInPlayerFlock = false;
@@ -16,10 +17,6 @@ public class LandFlockAgent : MonoBehaviour
     private float vSpeed;
     private bool leftFacing = false;
     private float turnSmoothRef;
-    private bool _isWalking = false;
-    private bool slowWalking = false;
-
-    
 
     private Animator anim;
 
@@ -27,6 +24,7 @@ public class LandFlockAgent : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         anim = GetComponentInChildren<Animator>();
+        speed = slowSpeed;
     }
 
     public void moveAgent(Vector3 targetPosition)
@@ -67,55 +65,52 @@ public class LandFlockAgent : MonoBehaviour
     {
         Vector3 movementDirection;
         movementDirection = Vector3.zero;
-        if (isInPlayerFlock == true)
+        if (isInPlayerFlock)
         {
             movementDirection += targetPosition;
             movementDirection -= transform.position;
-            if (movementDirection.sqrMagnitude > moveThreshold)
+            movementDirection.y = 0;
+            if (movementDirection.sqrMagnitude > accelThreshold)
             {
-                //Debug.Log(movementDirection.normalized.x);
-                return movementDirection.normalized;
+                speed = fastSpeed;
+                StartCoroutine(GottaGoFast(1));
             }
-            if (movementDirection.sqrMagnitude <= moveThreshold && slowWalking == false && _isWalking)
-            {
-                speed = slowSpeed;
-                slowWalking = true;
-                StartCoroutine(SlowWalk(1));
-                return movementDirection.normalized;
-                
-            }
-            if (movementDirection.sqrMagnitude <= moveThreshold && slowWalking == true)
-            {
-                return Vector3.zero;
-            }
-            else { return Vector3.zero; }
-            /*else
-            {
-                if (!walkWaiting)
-                {
-                    StartCoroutine(WalkWait(1));
-                    walkWaiting = true;
-                }
-                return Vector3.zero;
-            }*/
             
-        }//once the player collects the agent, the target is the players position (input in the class)
+            if (movementDirection.sqrMagnitude < moveThreshold)
+            {
+                Walking(false);
+                speed = slowSpeed;
+                return Vector3.zero;
+            }
+            else
+            {
+                Walking(true);
+                return movementDirection.normalized;
+            }
+        }
+        else
+        {
+            Walking(false);
+            return Vector3.zero;
+        }
+    }
 
-        else { return movementDirection; }
+    IEnumerator GottaGoFast(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        speed = slowSpeed;
     }
 
     //animation
-    public void Walking(bool isWalking)
+    private void Walking(bool isWalking)
     {
         if (isWalking == true && isInPlayerFlock == true)
         {
             anim.SetBool("isWalking", true);
-            _isWalking = isWalking;
         }
         else
         {
             anim.SetBool("isWalking", false);
-            _isWalking = isWalking;
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -124,13 +119,5 @@ public class LandFlockAgent : MonoBehaviour
         {
             isInPlayerFlock = true;
         }
-    }
-
-    IEnumerator SlowWalk(float waitTime)
-    {
-        yield return new WaitForSeconds(waitTime);
-        speed = fastSpeed;
-        slowWalking = false;
-        Debug.Log("slowWalking");
     }
 }

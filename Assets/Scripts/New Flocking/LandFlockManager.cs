@@ -7,13 +7,17 @@ public class LandFlockManager : MonoBehaviour
     public GameObject[] agentList;
     private LandFlockAgent[] agentScripts;
 
-    public Vector3 targetRandomisationMultiplier;
+    public float minTargetRandomisation;
+    public float maxTargetRandomisation;
     private Vector3[] randomiseTargetVector;
 
     public GameObject player;
 
     public float animSpeedMin = 0.9f;
     public float animSpeedMax = 1.1f;
+
+    public float randomiseByMin = -1f;
+    public float randomiseByMax = 1f;
 
     public bool isEnding = false;
     private bool isEndingWalking = true;
@@ -25,9 +29,13 @@ public class LandFlockManager : MonoBehaviour
         for (int i = 0; i < agentList.Length; i++)
         {
             agentScripts[i] = agentList[i].GetComponent<LandFlockAgent>(); //for each agent, assign its flockingAgent script to the all agents array
-            //agentScripts[i].speed = AssignSpeed(); //randomly assigns the speed of each agent by accessing its script 
-            //agentScripts[i].flockManager = this;
-            randomiseTargetVector[i] = Vector3.Scale(Random.insideUnitSphere, targetRandomisationMultiplier); //gives each member of the flock a unique random target vector offset
+            agentScripts[i].slowSpeed += Random.Range(randomiseByMin, randomiseByMax);
+            agentScripts[i].fastSpeed += Random.Range(randomiseByMin, randomiseByMax);
+            randomiseTargetVector[i] = new Vector3(Random.Range(-15,-2), 0, Random.Range(-15,15));
+            
+            
+            //randomiseTargetVector[i] = Vector3.Scale(Random.insideUnitSphere, targetRandomisationMultiplier); //gives each member of the flock a unique random target vector offset
+            
             Animator anim = agentList[i].GetComponentInChildren<Animator>();
             anim.SetFloat("AnimSpeedModifier", Random.Range(animSpeedMin, animSpeedMax));
             anim.SetBool("isMirror", Random.value > 0.5f);
@@ -36,42 +44,15 @@ public class LandFlockManager : MonoBehaviour
     private void Update()
     {
         Vector3 playerVector = player.transform.position;
-        if (isEnding == false)
+        for (int i = 0; i < agentScripts.Length; i++)
         {
-            for (int i = 0; i < agentScripts.Length; i++)
+            Vector3 playerVectorRandomised;
+            playerVectorRandomised = playerVector + randomiseTargetVector[i];
+            agentScripts[i].moveAgent(playerVectorRandomised);
+            if (isEnding)
             {
-                Vector3 playerVectorRandomised;
-                playerVectorRandomised = playerVector + randomiseTargetVector[i];
-                agentScripts[i].moveAgent(playerVectorRandomised);
-                if (Input.GetAxisRaw("Horizontal") != 0)
-                {
-                    agentScripts[i].Walking(true);
-                }
-                else
-                {
-                    agentScripts[i].Walking(false);
-                }
-            }
-        }
-        if (isEnding)
-        {
-            if (isEndingWalking)
-            {
-                for (int i = 0; i < agentScripts.Length; i++)
-                {
-                    Vector3 playerVectorRandomised;
-                    playerVectorRandomised = playerVector + randomiseTargetVector[i];
-                    agentScripts[i].moveAgent(playerVectorRandomised);
-                    agentScripts[i].Walking(true);
-                }
-                StartCoroutine(Ending(2));
-            }
-            else
-            {
-                for (int i = 0; i < agentScripts.Length; i++)
-                {
-                    agentScripts[i].Walking(false);
-                }
+                agentScripts[i].slowSpeed = 2;
+                agentScripts[i].fastSpeed = 5;
             }
         }
     }
