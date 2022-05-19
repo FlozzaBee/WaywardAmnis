@@ -272,7 +272,7 @@ public class EventManager : MonoBehaviour
         characterMovement.isEnding = true;
         landFlockManager.isEnding = true;
         //transform player to communication mode here
-        StartCoroutine(WaitForZoomOut(2));
+        StartCoroutine(WaitForZoomOut(4));
     }
 
     IEnumerator WaitForZoomOut(float waitTime)

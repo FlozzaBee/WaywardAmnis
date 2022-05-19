@@ -39,7 +39,7 @@ public class LandFlockAgent : MonoBehaviour
         }
         vSpeed -= gravity * Time.deltaTime;
 
-        Vector3 moveVector = new Vector3(moveDirection.x * Time.deltaTime * speed, vSpeed, moveDirection.z * Time.deltaTime * speed);
+        Vector3 moveVector = new Vector3(moveDirection.x * Time.deltaTime * speed, vSpeed * Time.deltaTime, moveDirection.z * Time.deltaTime * speed);
         
         characterController.Move(moveVector);
 

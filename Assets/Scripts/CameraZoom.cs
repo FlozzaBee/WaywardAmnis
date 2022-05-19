@@ -20,7 +20,9 @@ public class CameraZoom : MonoBehaviour
     [Header("Zoom out parameters")]
     public float zoomOutTarget = 40;
     public float zoomOutTime = 5;
+    public float camHeightTarget = 7f;
     private float camZoomSmoothRef;
+    private float camXMoveSmoothRef;
 
     [Header("Modified by EventManager")]
     public bool isZoomingIn = true;
@@ -46,6 +48,7 @@ public class CameraZoom : MonoBehaviour
         if (isZoomingOut)
         {
             transposer.m_CameraDistance = Mathf.SmoothDamp(transposer.m_CameraDistance, zoomOutTarget, ref camZoomSmoothRef, zoomOutTime);
+            transposer.m_TrackedObjectOffset.x = Mathf.SmoothDamp(transposer.m_TrackedObjectOffset.x, camHeightTarget, ref camXMoveSmoothRef, zoomOutTime);
         }//smoothly moves camera to zoomed out target
     }
 

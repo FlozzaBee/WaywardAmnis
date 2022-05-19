@@ -17,6 +17,8 @@ TagManager:
   - LandFlockAgent
   - PlayerLand
   - EndTrigger
+  - EndingBird
+  - EndingBirdSpinner
   layers:
   - Default
   - TransparentFX
