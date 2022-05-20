@@ -40,6 +40,7 @@ public class EventManager : MonoBehaviour
     public Animator treeAnimator;
     public GameObject treeEventTarget;
     public float treeAnimTime;
+    public ParticleSystem treeParticles;
 
     [Header("Water Collision")]
     private float turnVelocity; //smmoothdamp ref
@@ -196,6 +197,8 @@ public class EventManager : MonoBehaviour
             cinemachinceSwitch.SwitchState("Event3");
             trigger.enabled = false;
             StartCoroutine(WaitForTreeEvent(2));
+            ParticleSystem.EmissionModule emissionModule = treeParticles.emission;
+            emissionModule.rateOverTime = 0;
         }    
     }
 
