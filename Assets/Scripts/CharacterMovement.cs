@@ -342,7 +342,7 @@ public class CharacterMovement : MonoBehaviour
         float targetSpeed;
         if (direction.sqrMagnitude >= 0.1f)
         {
-            targetSpeed = speed;
+            targetSpeed = landSpeed;
             anim.SetBool("PlayerSmoving", true); //Moving animation enabled
         }
         else
@@ -350,7 +350,7 @@ public class CharacterMovement : MonoBehaviour
             targetSpeed = 0;
             anim.SetBool("PlayerSmoving", false); //Idle animation enabled
         }
-        landSpeedCurrent = Mathf.SmoothDamp(landSpeedCurrent, targetSpeed, ref landSpeedRef, landSpeedCurrent);
+        landSpeedCurrent = Mathf.SmoothDamp(landSpeedCurrent, targetSpeed, ref landSpeedRef, landSpeedSmoothTime);
 
         if (controller.isGrounded == true)
         {

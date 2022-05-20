@@ -8,6 +8,7 @@ public class EventManager : MonoBehaviour
     public CharacterMovement characterMovement;
     public CinemachineSwitch cinemachinceSwitch;
     public CameraZoom cameraZoom;
+    public VFXBehaviour vfxBehaviour;
 
     private GameObject eventFollowObject;
 
@@ -54,6 +55,13 @@ public class EventManager : MonoBehaviour
     [Header("End Event")]
     public LandFlockManager landFlockManager;
     public Animator broadcastAnimator;
+    [Header("Ending Timings")]
+    public float waitForBroadcast = 6;
+    public float waitForZoomOut = 2;
+    public float waitForThanksCam = 10;
+    public float waitForCreditsCam = 5;
+    public float waitForTitleCam = 5;
+
     
     void Update()
     {
@@ -268,6 +276,7 @@ public class EventManager : MonoBehaviour
         //ui siwtch? might not be needed 
         //characterMovement.anim.SetBool("LandCheck", true); //temp space for corns animation, doesn't do anything yet
         cinemachinceSwitch.SwitchState("PlayerFollow2");
+        vfxBehaviour.enableSkyChanger = true;
     }
 
     public void EndEvent()
@@ -276,21 +285,46 @@ public class EventManager : MonoBehaviour
         characterMovement.isEnding = true;
         landFlockManager.isEnding = true;
         //transform player to communication mode here
-        StartCoroutine(WaitForBroadcast(6));
-        StartCoroutine(WaitForZoomOut(8));
+        StartCoroutine(WaitForBroadcast(waitForBroadcast));
+        Debug.Log("starting end event");
     }
 
     IEnumerator WaitForBroadcast(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
         broadcastAnimator.SetTrigger("BroadcastTrigger");
+        Debug.Log("starting broadcast animation");
+        StartCoroutine(WaitForZoomOut(waitForZoomOut));
     }
 
     IEnumerator WaitForZoomOut(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
         cameraZoom.ZoomOut();
+        StartCoroutine(WaitForCredits(waitForThanksCam));
+        Debug.Log("starting zoom out");
     }
+
+    IEnumerator WaitForCredits(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        cinemachinceSwitch.SwitchState("End");
+        cinemachinceSwitch.SwitchState("End");
+        Debug.Log("moving to thanks cam");
+        yield return new WaitForSeconds(waitForCreditsCam);
+        Debug.Log("moving to credits cam");
+        cinemachinceSwitch.SwitchState("End 2");
+        cinemachinceSwitch.SwitchState("End 2"); //ive been using unity for like 3 years now and i JUST learned you can put multiple waitforseconds in a coroutine
+        //im so mad
+
+        //also the two switchstates is a lazy work around to avoid redoing stuff
+        yield return new WaitForSeconds(waitForTitleCam);
+        cinemachinceSwitch.SwitchState("End 3");
+        cinemachinceSwitch.SwitchState("End 3"); //it crahsed after adding a third yield so im kinda sus
+        Debug.Log("moving to title cam");
+    }
+
+
 }
 
 

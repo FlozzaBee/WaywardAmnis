@@ -20,7 +20,6 @@ public class LandFlockManager : MonoBehaviour
     public float randomiseByMax = 1f;
 
     public bool isEnding = false;
-    private bool isEndingWalking = true;
     private void Awake()
     {
         agentList = GameObject.FindGameObjectsWithTag("LandFlockAgent"); //finds all agents and adds them to agentList array
@@ -55,11 +54,5 @@ public class LandFlockManager : MonoBehaviour
                 agentScripts[i].fastSpeed = 5;
             }
         }
-    }
-
-    IEnumerator Ending(float waitTime)
-    {
-        yield return new WaitForSeconds(waitTime);
-        isEndingWalking = false;
     }
 }
