@@ -31,6 +31,7 @@ public class LandFlockManager : MonoBehaviour
             agentScripts[i].slowSpeed += Random.Range(randomiseByMin, randomiseByMax);
             agentScripts[i].fastSpeed += Random.Range(randomiseByMin, randomiseByMax);
             randomiseTargetVector[i] = new Vector3(Random.Range(-15,-2), 0, Random.Range(-15,15));
+            agentScripts[i].landFlockManager = this;
             
             
             //randomiseTargetVector[i] = Vector3.Scale(Random.insideUnitSphere, targetRandomisationMultiplier); //gives each member of the flock a unique random target vector offset
@@ -54,5 +55,10 @@ public class LandFlockManager : MonoBehaviour
                 agentScripts[i].fastSpeed = 5;
             }
         }
+    }
+
+    public void DoHaptics()
+    {
+        player.GetComponent<CharacterMovement>().ControllerRumbleLight();
     }
 }
