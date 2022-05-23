@@ -55,6 +55,7 @@ public class EventManager : MonoBehaviour
     [Header("End Event")]
     public LandFlockManager landFlockManager;
     public Animator broadcastAnimator;
+    public GameObject[] oceanPlanes;
     [Header("Ending Timings")]
     public float waitForBroadcast = 6;
     public float waitForZoomOut = 2;
@@ -288,6 +289,10 @@ public class EventManager : MonoBehaviour
         landFlockManager.isEnding = true;
         //transform player to communication mode here
         StartCoroutine(WaitForBroadcast(waitForBroadcast));
+        foreach (GameObject plane in oceanPlanes)
+        {
+            plane.SetActive(false);
+        }
         Debug.Log("starting end event");
     }
 
