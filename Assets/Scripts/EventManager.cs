@@ -189,7 +189,6 @@ public class EventManager : MonoBehaviour
         uiManager.SwitchIndicatorAir();
         uiManager.flockTargetSize = TreeTargetFlockSize;
         ambientParticles.gameObject.SetActive(false);
-        flockManager.enabled = false;
     }
 
     public void TreeBarrierEvent(Collider trigger)
@@ -270,9 +269,8 @@ public class EventManager : MonoBehaviour
         cinemachinceSwitch.SwitchState(null);
     }
 
-    public void LandMovementTrigger(Collider krissyStopper)
+    public void LandMovementTrigger()
     {
-        krissyStopper.enabled = false;
         characterMovement.movementType = 2; //switches to land movement 
         airFlockManager.enabled = false; //disables birds for performance
         //ui siwtch? might not be needed 
