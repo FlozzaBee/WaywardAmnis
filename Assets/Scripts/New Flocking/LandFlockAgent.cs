@@ -12,6 +12,8 @@ public class LandFlockAgent : MonoBehaviour
     public float speed;
     public float turnSmoothTime = 0.25f;
 
+    public LandFlockManager landFlockManager;
+
     private bool isInPlayerFlock = false;
     private CharacterController characterController;
     private float vSpeed;
@@ -117,7 +119,9 @@ public class LandFlockAgent : MonoBehaviour
     {
         if (other.tag == "PlayerLand" && isInPlayerFlock == false)
         {
+            landFlockManager.DoHaptics();
             isInPlayerFlock = true;
+            Debug.Log("dunna haptic");
         }
     }
 }

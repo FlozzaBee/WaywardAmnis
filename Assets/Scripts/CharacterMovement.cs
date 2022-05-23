@@ -226,7 +226,7 @@ public class CharacterMovement : MonoBehaviour
 
         if (other.tag == "LandMovementTrigger")
         {
-            eventManager.LandMovementTrigger();
+            eventManager.LandMovementTrigger(other);
         }
 
         if (other.tag == "EndTrigger")
