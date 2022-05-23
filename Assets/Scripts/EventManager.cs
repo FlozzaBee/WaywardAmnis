@@ -56,6 +56,7 @@ public class EventManager : MonoBehaviour
     public LandFlockManager landFlockManager;
     public Animator broadcastAnimator;
     public GameObject[] oceanPlanes;
+    public Animator[] endBirdFlyBy;
     [Header("Ending Timings")]
     public float waitForBroadcast = 6;
     public float waitForZoomOut = 2;
@@ -289,9 +290,10 @@ public class EventManager : MonoBehaviour
         landFlockManager.isEnding = true;
         //transform player to communication mode here
         StartCoroutine(WaitForBroadcast(waitForBroadcast));
-        foreach (GameObject plane in oceanPlanes)
+        foreach (GameObject brine in oceanPlanes)
         {
-            plane.SetActive(false);
+            brine.SetActive(false);
+            //removed hero-brine
         }
         Debug.Log("starting end event");
     }
@@ -318,8 +320,10 @@ public class EventManager : MonoBehaviour
         cinemachinceSwitch.SwitchState("End");
         cinemachinceSwitch.SwitchState("End");
         Debug.Log("moving to thanks cam");
+        endBirdFlyBy[0].SetTrigger("BirdFlyBy");
         yield return new WaitForSeconds(waitForCreditsCam);
         Debug.Log("moving to credits cam");
+        endBirdFlyBy[1].SetTrigger("BirdFlyBy");
         cinemachinceSwitch.SwitchState("End 2");
         cinemachinceSwitch.SwitchState("End 2"); //ive been using unity for like 3 years now and i JUST learned you can put multiple waitforseconds in a coroutine
         //im so mad

@@ -149,11 +149,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravity: 3
-  moveThreshold: 3
-  accelThreshold: 15
+  moveThreshold: 10
+  accelThreshold: 20
   fastSpeed: 12
   slowSpeed: 8
+  speed: 0
   turnSmoothTime: 0.26
+  landFlockManager: {fileID: 0}
 --- !u!143 &5958623987150259689
 CharacterController:
   m_ObjectHideFlags: 0
@@ -165,13 +167,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
+  m_Height: 10
   m_Radius: 1.51
-  m_SlopeLimit: 45
+  m_SlopeLimit: 60
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 3.5, z: 0}
 --- !u!1 &5180002312660907009
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,6 +633,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Goat
       objectReference: {fileID: 0}
+    - target: {fileID: 7205140776170859923, guid: 34f2321dd46ca6d4e903e18433e1bdb4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0abcada98a6f3f943ace946ba61f2dbd, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34f2321dd46ca6d4e903e18433e1bdb4, type: 3}
 --- !u!1 &7285972812931338395 stripped
@@ -663,3 +669,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 34f2321dd46ca6d4e903e18433e1bdb4, type: 3}
   m_PrefabInstance: {fileID: 7628412198735326666}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8623560524755988656 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -7029948723529949830, guid: 34f2321dd46ca6d4e903e18433e1bdb4, type: 3}
+  m_PrefabInstance: {fileID: 7628412198735326666}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6416567704638971579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8623560524755988656}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b617495128a50a40852b2f116af92d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shiftSpeed: 0.05
+  rainbowMaterials: 00000000
+  saturation: 0.7
+  value: 0.6

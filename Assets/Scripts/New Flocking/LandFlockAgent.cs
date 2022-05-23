@@ -44,24 +44,27 @@ public class LandFlockAgent : MonoBehaviour
         characterController.Move(moveVector);
 
         //turning
-        if (moveDirection.x < 0)
+        if (isInPlayerFlock)
         {
-            leftFacing = true;
+            if (moveDirection.x < 0)
+            {
+                leftFacing = true;
+            }
+            if (moveDirection.x > 0)
+            {
+                leftFacing = false;
+            }
+            float angle = transform.rotation.eulerAngles.y;
+            if (leftFacing == true)
+            {
+                angle = Mathf.SmoothDampAngle(angle, 180, ref turnSmoothRef, turnSmoothTime);
+            }
+            if (leftFacing == false)
+            {
+                angle = Mathf.SmoothDampAngle(angle, 0, ref turnSmoothRef, turnSmoothTime);
+            }
+            transform.rotation = Quaternion.Euler(0, angle, 0);
         }
-        if (moveDirection.x > 0)
-        {
-            leftFacing = false;
-        }
-        float angle = transform.rotation.eulerAngles.y;
-        if (leftFacing == true)
-        {
-            angle = Mathf.SmoothDampAngle(angle, 180, ref turnSmoothRef, turnSmoothTime);
-        }
-        if (leftFacing == false)
-        {
-            angle = Mathf.SmoothDampAngle(angle, 0, ref turnSmoothRef, turnSmoothTime);
-        }
-        transform.rotation = Quaternion.Euler(0, angle, 0);
     }
     private Vector3 CalculateDirection(Vector3 targetPosition)
     {
@@ -121,6 +124,7 @@ public class LandFlockAgent : MonoBehaviour
         {
             landFlockManager.DoHaptics();
             isInPlayerFlock = true;
+            GetComponentInChildren<RainbowPlus>().enabled = true;
             Debug.Log("dunna haptic");
         }
     }
