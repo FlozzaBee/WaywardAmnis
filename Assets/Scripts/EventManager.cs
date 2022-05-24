@@ -276,6 +276,7 @@ public class EventManager : MonoBehaviour
     {
         krissyStopper.enabled = false;
         characterMovement.movementType = 2; //switches to land movement 
+        characterMovement.anim.SetBool("Groundcheck", true); //Become GOAT animation enabled
         airFlockManager.enabled = false; //disables birds for performance
         //ui siwtch? might not be needed 
         //characterMovement.anim.SetBool("LandCheck", true); //temp space for corns animation, doesn't do anything yet
@@ -286,6 +287,7 @@ public class EventManager : MonoBehaviour
     public void EndEvent()
     {
         characterMovement.playerControl = false;
+        characterMovement.anim.SetBool("Endcheck", true); //Become DISH animation begins
         characterMovement.isEnding = true;
         landFlockManager.isEnding = true;
         //transform player to communication mode here
