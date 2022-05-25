@@ -1,6 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{9789605A-9E46-45C1-84FC-AA46429CB57E}" SchemaVersion="103">
 	<Events>
-		<WorkUnit Name="Default Work Unit" ID="{9789605A-9E46-45C1-84FC-AA46429CB57E}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{9789605A-9E46-45C1-84FC-AA46429CB57E}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="Play_Wayward_Amnis_water_level" ID="{9C7A8D55-24E1-4EF8-A8DD-FE6C16EF9895}">
+					<ChildrenList>
+						<Action Name="" ID="{0CEB259C-2355-4EA8-8783-7697E1699ED7}" ShortID="701310857">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Wayward_Amnis_water_level" ID="{ED79BAD5-1566-48F9-BB20-918FEB84FD9A}" WorkUnitID="{4115B8AA-C10C-4A92-8102-1297F60D3020}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Stop_Wayward_Amnis_water_level" ID="{0B8FEDBC-E758-4A45-969E-887B0E7F3AD9}">
+					<ChildrenList>
+						<Action Name="" ID="{A74B7D85-14F7-48E6-B9C1-2D1708A1553F}" ShortID="610470321">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+								<Property Name="FadeTime" Type="Real64" Value="3"/>
+								<Property Name="Scope" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Wayward_Amnis_water_level" ID="{ED79BAD5-1566-48F9-BB20-918FEB84FD9A}" WorkUnitID="{4115B8AA-C10C-4A92-8102-1297F60D3020}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_Wayward_Amnis_sky_level" ID="{542CA057-AB57-45F9-BB40-DCE7B5406E58}">
+					<ChildrenList>
+						<Action Name="" ID="{19967F74-6B04-4C66-92CB-6D5D4DE3946A}" ShortID="555087214">
+							<PropertyList>
+								<Property Name="Delay" Type="Real64" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Wayward_Amnis_sky_level" ID="{E5842717-5F27-4324-84D2-21AE6A62FCCD}" WorkUnitID="{4115B8AA-C10C-4A92-8102-1297F60D3020}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Stop_Wayward_Amnis_sky_level" ID="{2789BDD1-A40B-4BA6-8F37-C11D041C3EDD}">
+					<ChildrenList>
+						<Action Name="" ID="{28E80F80-0080-43BA-A139-832B2938FA38}" ShortID="956826360">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+								<Property Name="FadeTime" Type="Real64" Value="3"/>
+								<Property Name="Scope" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Wayward_Amnis_sky_level" ID="{E5842717-5F27-4324-84D2-21AE6A62FCCD}" WorkUnitID="{4115B8AA-C10C-4A92-8102-1297F60D3020}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Mute_Wayward_Amnis_water_level" ID="{599B4ACC-20C9-4759-A61E-93FBA8BBA126}">
+					<ChildrenList>
+						<Action Name="" ID="{A733C9C6-DEB2-417A-AF53-B3C26FB1A435}" ShortID="642081495">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="4"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Wayward_Amnis_water_level" ID="{ED79BAD5-1566-48F9-BB20-918FEB84FD9A}" WorkUnitID="{4115B8AA-C10C-4A92-8102-1297F60D3020}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
 	</Events>
 </WwiseDocument>

@@ -24,7 +24,7 @@ MonoBehaviour:
     ParentPath: Virtual Acoustics\Default Work Unit
     guid: 31eade354988204db8a45aa3a60106ac
     GuidInternal: 
-    m_lastTime: -8585491319465041198
+    m_lastTime: -8585486150294390730
     List: []
   AuxBusWwu:
   - PhysicalPath: Master-Mixer Hierarchy\Default Work Unit.wwu
@@ -38,7 +38,7 @@ MonoBehaviour:
     ParentPath: Master-Mixer Hierarchy\Default Work Unit
     guid: 77834644fb807f4486b765382c40d970
     GuidInternal: 
-    m_lastTime: -8585491319465270558
+    m_lastTime: -8585486150294600557
     List:
     - name: Master Audio Bus
       guid: d8a41415a61d2a41a17e75ca0c2149f3
@@ -66,8 +66,22 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: 7feca0e03ff8944d96289b6d8673ac7f
     GuidInternal: 
-    m_lastTime: -8585491319465130945
-    List: []
+    m_lastTime: -8585481224175947975
+    List:
+    - name: Main_Soundbank
+      guid: 85f3cc55f42b754fa29c00d0c716ba9c
+      id: 2228651116
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7feca0e03ff8944d96289b6d8673ac7f
+      - ElementName: Main_Soundbank
+        ObjectType: 7
+        guid: 85f3cc55f42b754fa29c00d0c716ba9c
+      Path: SoundBanks\Default Work Unit\Main_Soundbank
   EventWwu:
   - PhysicalPath: Events\Default Work Unit.wwu
     PathAndIcons:
@@ -80,8 +94,93 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: 5a608997469ec14584fcaa46429cb57e
     GuidInternal: 
-    m_lastTime: -8585491319465330396
-    List: []
+    m_lastTime: -8585481224175670992
+    List:
+    - name: Mute_Wayward_Amnis_water_level
+      guid: cc4a9b59c9205947a61e93fba8bba126
+      id: 2807884850
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 5a608997469ec14584fcaa46429cb57e
+      - ElementName: Mute_Wayward_Amnis_water_level
+        ObjectType: 3
+        guid: cc4a9b59c9205947a61e93fba8bba126
+      Path: Events\Default Work Unit\Mute_Wayward_Amnis_water_level
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Play_Wayward_Amnis_sky_level
+      guid: 57a02c5457abf945bb40dce7b5406e58
+      id: 932368361
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 5a608997469ec14584fcaa46429cb57e
+      - ElementName: Play_Wayward_Amnis_sky_level
+        ObjectType: 3
+        guid: 57a02c5457abf945bb40dce7b5406e58
+      Path: Events\Default Work Unit\Play_Wayward_Amnis_sky_level
+      maxAttenuation: 0
+      maxDuration: 71.816
+      minDuration: 71.816
+    - name: Play_Wayward_Amnis_water_level
+      guid: 558d7a9ce124f84ea8ddfe6c16ef9895
+      id: 3989306119
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 5a608997469ec14584fcaa46429cb57e
+      - ElementName: Play_Wayward_Amnis_water_level
+        ObjectType: 3
+        guid: 558d7a9ce124f84ea8ddfe6c16ef9895
+      Path: Events\Default Work Unit\Play_Wayward_Amnis_water_level
+      maxAttenuation: 0
+      maxDuration: 156.288
+      minDuration: 156.288
+    - name: Stop_Wayward_Amnis_sky_level
+      guid: d1bd89270ba4a64b8f37c11d041c3edd
+      id: 404997951
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 5a608997469ec14584fcaa46429cb57e
+      - ElementName: Stop_Wayward_Amnis_sky_level
+        ObjectType: 3
+        guid: d1bd89270ba4a64b8f37c11d041c3edd
+      Path: Events\Default Work Unit\Stop_Wayward_Amnis_sky_level
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Stop_Wayward_Amnis_water_level
+      guid: bced8f0b58e7454a969e887b0e7f3ad9
+      id: 2585914605
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 5a608997469ec14584fcaa46429cb57e
+      - ElementName: Stop_Wayward_Amnis_water_level
+        ObjectType: 3
+        guid: bced8f0b58e7454a969e887b0e7f3ad9
+      Path: Events\Default Work Unit\Stop_Wayward_Amnis_water_level
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
   RtpcWwu:
   - PhysicalPath: Game Parameters\Default Work Unit.wwu
     PathAndIcons:
@@ -94,7 +193,7 @@ MonoBehaviour:
     ParentPath: Game Parameters\Default Work Unit
     guid: 9519e40764ab524c94993ddae94148d5
     GuidInternal: 
-    m_lastTime: -8585491319465310471
+    m_lastTime: -8585486150294759280
     List: []
   StateWwu:
   - PhysicalPath: States\Default Work Unit.wwu
@@ -108,8 +207,74 @@ MonoBehaviour:
     ParentPath: States\Default Work Unit
     guid: d3f01e71ecd08d48bf75a8266e7278a8
     GuidInternal: 
-    m_lastTime: -8585491319465091058
-    List: []
+    m_lastTime: -8585482016885415329
+    List:
+    - name: Music_State_Group
+      guid: 012d9d7b9c959148973d2f9a9603f078
+      id: 2434766612
+      PathAndIcons:
+      - ElementName: States
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: d3f01e71ecd08d48bf75a8266e7278a8
+      - ElementName: Music_State_Group
+        ObjectType: 9
+        guid: 012d9d7b9c959148973d2f9a9603f078
+      Path: States\Default Work Unit\Music_State_Group
+      values:
+      - name: Air_State
+        guid: 5539cb4086fe304c8d8c87a130a4e997
+        id: 2459462677
+        PathAndIcons:
+        - ElementName: States
+          ObjectType: 5
+          guid: 00000000000000000000000000000000
+        - ElementName: Default Work Unit
+          ObjectType: 12
+          guid: d3f01e71ecd08d48bf75a8266e7278a8
+        - ElementName: Music_State_Group
+          ObjectType: 9
+          guid: 012d9d7b9c959148973d2f9a9603f078
+        - ElementName: Air_State
+          ObjectType: 8
+          guid: 5539cb4086fe304c8d8c87a130a4e997
+      - name: None
+        guid: 63ccd9d77927614bbad1658a14c7d273
+        id: 748895195
+        PathAndIcons:
+        - ElementName: States
+          ObjectType: 5
+          guid: 00000000000000000000000000000000
+        - ElementName: Default Work Unit
+          ObjectType: 12
+          guid: d3f01e71ecd08d48bf75a8266e7278a8
+        - ElementName: Music_State_Group
+          ObjectType: 9
+          guid: 012d9d7b9c959148973d2f9a9603f078
+        - ElementName: None
+          ObjectType: 8
+          guid: 63ccd9d77927614bbad1658a14c7d273
+      - name: Water_State
+        guid: 049c18f1e1a7974eac3fe905c00a2fca
+        id: 2008033692
+        PathAndIcons:
+        - ElementName: States
+          ObjectType: 5
+          guid: 00000000000000000000000000000000
+        - ElementName: Default Work Unit
+          ObjectType: 12
+          guid: d3f01e71ecd08d48bf75a8266e7278a8
+        - ElementName: Music_State_Group
+          ObjectType: 9
+          guid: 012d9d7b9c959148973d2f9a9603f078
+        - ElementName: Water_State
+          ObjectType: 8
+          guid: 049c18f1e1a7974eac3fe905c00a2fca
+      ValueGuids: []
+      ValueIcons: []
+      valuesInternal: []
   SwitchWwu:
   - PhysicalPath: Switches\Default Work Unit.wwu
     PathAndIcons:
@@ -122,7 +287,7 @@ MonoBehaviour:
     ParentPath: Switches\Default Work Unit
     guid: 579eeb4ab90d014dbda566f899095f4a
     GuidInternal: 
-    m_lastTime: -8585491319465071092
+    m_lastTime: -8585486150294430852
     List: []
   TriggerWwu:
   - PhysicalPath: Triggers\Default Work Unit.wwu
@@ -136,10 +301,10 @@ MonoBehaviour:
     ParentPath: Triggers\Default Work Unit
     guid: 07ffde1db467f74fa7c5c910c5c6ae89
     GuidInternal: 
-    m_lastTime: -8585491319465051146
+    m_lastTime: -8585486150294411053
     List: []
   ExpandedFileSystemItemIds: 
-  ExpandedWaapiItemIds: 
+  ExpandedWaapiItemIds: 01000000050000000600000007000000090000000a0000000b0000000d0000000f00000010000000110000001400000024000000
   AutoSyncSelection: 0
   autoPopulateEnabled: 1
   currentDataSource: 0

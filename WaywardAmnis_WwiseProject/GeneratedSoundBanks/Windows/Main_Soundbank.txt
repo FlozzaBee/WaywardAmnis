@@ -1,0 +1,10 @@
+Event	ID	Name			Wwise Object Path	Notes
+	404997951	Stop_Wayward_Amnis_sky_level			\Default Work Unit\Stop_Wayward_Amnis_sky_level	
+	932368361	Play_Wayward_Amnis_sky_level			\Default Work Unit\Play_Wayward_Amnis_sky_level	
+	2585914605	Stop_Wayward_Amnis_water_level			\Default Work Unit\Stop_Wayward_Amnis_water_level	
+	3989306119	Play_Wayward_Amnis_water_level			\Default Work Unit\Play_Wayward_Amnis_water_level	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	448329294	Wayward_Amnis_water_level	C:\Users\Florian\Documents\Uni\Year 3 MonkaS\sim2\WaywardAmnis\WaywardAmnis_WwiseProject\.cache\Windows\SFX\Wayward_Amnis_water_level_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\Wayward_Amnis_water_level\Wayward_Amnis_water_level		30007360
+	807210496	Wayward_Amnis_sky_level	C:\Users\Florian\Documents\Uni\Year 3 MonkaS\sim2\WaywardAmnis\WaywardAmnis_WwiseProject\.cache\Windows\SFX\Wayward_Amnis_sky_level_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\Wayward_Amnis_sky_level\Wayward_Amnis_sky_level		13404736
+

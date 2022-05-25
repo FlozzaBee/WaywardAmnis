@@ -11,6 +11,36 @@
 
 namespace AK
 {
+    namespace EVENTS
+    {
+        static const AkUniqueID PLAY_WAYWARD_AMNIS_SKY_LEVEL = 932368361U;
+        static const AkUniqueID PLAY_WAYWARD_AMNIS_WATER_LEVEL = 3989306119U;
+        static const AkUniqueID STOP_WAYWARD_AMNIS_SKY_LEVEL = 404997951U;
+        static const AkUniqueID STOP_WAYWARD_AMNIS_WATER_LEVEL = 2585914605U;
+    } // namespace EVENTS
+
+    namespace STATES
+    {
+        namespace MUSIC_STATE_GROUP
+        {
+            static const AkUniqueID GROUP = 2434766612U;
+
+            namespace STATE
+            {
+                static const AkUniqueID AIR_STATE = 2459462677U;
+                static const AkUniqueID NONE = 748895195U;
+                static const AkUniqueID WATER_STATE = 2008033692U;
+            } // namespace STATE
+        } // namespace MUSIC_STATE_GROUP
+
+    } // namespace STATES
+
+    namespace BANKS
+    {
+        static const AkUniqueID INIT = 1355168291U;
+        static const AkUniqueID MAIN_SOUNDBANK = 2228651116U;
+    } // namespace BANKS
+
     namespace BUSSES
     {
         static const AkUniqueID MASTER_AUDIO_BUS = 3803692087U;

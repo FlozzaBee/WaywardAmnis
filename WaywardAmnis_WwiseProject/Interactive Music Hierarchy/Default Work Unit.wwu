@@ -1,6 +1,201 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{4115B8AA-C10C-4A92-8102-1297F60D3020}" SchemaVersion="103">
 	<InteractiveMusic>
-		<WorkUnit Name="Default Work Unit" ID="{4115B8AA-C10C-4A92-8102-1297F60D3020}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{4115B8AA-C10C-4A92-8102-1297F60D3020}" PersistMode="Standalone">
+			<ChildrenList>
+				<MusicSegment Name="Wayward_Amnis_sky_level" ID="{E5842717-5F27-4324-84D2-21AE6A62FCCD}" ShortID="758631567">
+					<PropertyList>
+						<Property Name="EndPosition" Type="Real64" Value="69816"/>
+						<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
+						<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
+						<Property Name="MaxSoundPerInstance" Type="int16">
+							<ValueList>
+								<Value>1</Value>
+							</ValueList>
+						</Property>
+						<Property Name="UseMaxSoundPerInstance" Type="bool">
+							<ValueList>
+								<Value>True</Value>
+							</ValueList>
+						</Property>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A93F0E4F-1CED-4842-8330-7F1290E9DDFB}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{44468377-80FB-447F-86B7-65382C40D970}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<MusicTrack Name="Wayward_Amnis_sky_level" ID="{9454B8DC-5CFE-4C2F-9E04-B6E14C36EF49}" ShortID="1058421717">
+							<ReferenceList>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{44468377-80FB-447F-86B7-65382C40D970}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="Wayward_Amnis_sky_level" ID="{BC180EEB-502E-4B49-9B50-9C42A15AD709}">
+									<Language>SFX</Language>
+									<AudioFile>Wayward_Amnis_sky_level.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="807210496"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<TransitionList>
+								<MusicTransition Name="Root" ID="{192B8394-37D2-45C5-B750-F106BD46E0D9}">
+									<PropertyList>
+										<Property Name="IsFolder" Type="bool" Value="True"/>
+									</PropertyList>
+									<TransitionInfo/>
+								</MusicTransition>
+							</TransitionList>
+							<ObjectLists>
+								<ObjectList Name="Sequences">
+									<Reference>
+										<Local>
+											<MusicTrackSequence Name="" ID="{C9E5EF4E-EE70-440B-A863-0410D1D5AE60}">
+												<ObjectLists>
+													<ObjectList Name="Clips">
+														<Reference>
+															<Local>
+																<MusicClip Name="Wayward_Amnis_sky_level" ID="{8204152B-065C-4818-8894-C05908668F2A}">
+																	<PropertyList>
+																		<Property Name="EndTrimOffset" Type="Real64" Value="69816"/>
+																		<Property Name="FadeInMode" Type="int16" Value="0"/>
+																		<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																	</PropertyList>
+																	<AudioSourceRef Name="Wayward_Amnis_sky_level" ID="{BC180EEB-502E-4B49-9B50-9C42A15AD709}"/>
+																</MusicClip>
+															</Local>
+														</Reference>
+													</ObjectList>
+												</ObjectLists>
+											</MusicTrackSequence>
+										</Local>
+									</Reference>
+								</ObjectList>
+							</ObjectLists>
+						</MusicTrack>
+					</ChildrenList>
+					<ObjectLists>
+						<ObjectList Name="Cues">
+							<Reference>
+								<Local>
+									<MusicCue Name="Entry Cue" ID="{723408E0-14B0-4581-BE27-7425283D1789}"/>
+								</Local>
+							</Reference>
+							<Reference>
+								<Local>
+									<MusicCue Name="Exit Cue" ID="{89DDEAA0-D7C6-4CA9-88F4-1C469DF7E8E0}">
+										<PropertyList>
+											<Property Name="CueType" Type="int16" Value="1"/>
+											<Property Name="TimeMs" Type="Real64" Value="69816"/>
+										</PropertyList>
+									</MusicCue>
+								</Local>
+							</Reference>
+						</ObjectList>
+					</ObjectLists>
+				</MusicSegment>
+				<MusicSegment Name="Wayward_Amnis_water_level" ID="{ED79BAD5-1566-48F9-BB20-918FEB84FD9A}" ShortID="154109520">
+					<PropertyList>
+						<Property Name="EndPosition" Type="Real64" Value="156288"/>
+						<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
+						<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
+						<Property Name="MaxSoundPerInstance" Type="int16">
+							<ValueList>
+								<Value>1</Value>
+							</ValueList>
+						</Property>
+						<Property Name="UseMaxSoundPerInstance" Type="bool">
+							<ValueList>
+								<Value>True</Value>
+							</ValueList>
+						</Property>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A93F0E4F-1CED-4842-8330-7F1290E9DDFB}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{44468377-80FB-447F-86B7-65382C40D970}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<MusicTrack Name="Wayward_Amnis_water_level" ID="{9CB2B592-A81A-422D-AAE7-073AC3C33002}" ShortID="250738323">
+							<ReferenceList>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{44468377-80FB-447F-86B7-65382C40D970}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="Wayward_Amnis_water_level" ID="{1CD9A548-5E50-4970-A4BF-9E95500EFE98}">
+									<Language>SFX</Language>
+									<AudioFile>Wayward_Amnis_water_level.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="448329294"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<TransitionList>
+								<MusicTransition Name="Root" ID="{49E542BC-9C23-434E-8607-80D69B0AC834}">
+									<PropertyList>
+										<Property Name="IsFolder" Type="bool" Value="True"/>
+									</PropertyList>
+									<TransitionInfo/>
+								</MusicTransition>
+							</TransitionList>
+							<ObjectLists>
+								<ObjectList Name="Sequences">
+									<Reference>
+										<Local>
+											<MusicTrackSequence Name="" ID="{C6E4675F-C6F1-4490-9FD4-D04B995C015D}">
+												<ObjectLists>
+													<ObjectList Name="Clips">
+														<Reference>
+															<Local>
+																<MusicClip Name="Wayward_Amnis_water_level" ID="{7F560DDA-02F4-4A25-9052-CC9E9220412A}">
+																	<PropertyList>
+																		<Property Name="EndTrimOffset" Type="Real64" Value="156288"/>
+																		<Property Name="FadeInMode" Type="int16" Value="0"/>
+																		<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																	</PropertyList>
+																	<AudioSourceRef Name="Wayward_Amnis_water_level" ID="{1CD9A548-5E50-4970-A4BF-9E95500EFE98}"/>
+																</MusicClip>
+															</Local>
+														</Reference>
+													</ObjectList>
+												</ObjectLists>
+											</MusicTrackSequence>
+										</Local>
+									</Reference>
+								</ObjectList>
+							</ObjectLists>
+						</MusicTrack>
+					</ChildrenList>
+					<ObjectLists>
+						<ObjectList Name="Cues">
+							<Reference>
+								<Local>
+									<MusicCue Name="Entry Cue" ID="{6718BE52-19C2-4B83-B392-638F7BFF68DD}"/>
+								</Local>
+							</Reference>
+							<Reference>
+								<Local>
+									<MusicCue Name="Exit Cue" ID="{6A7FC780-45E4-49C8-9169-D22CCE16FDA6}">
+										<PropertyList>
+											<Property Name="CueType" Type="int16" Value="1"/>
+											<Property Name="TimeMs" Type="Real64" Value="156288"/>
+										</PropertyList>
+									</MusicCue>
+								</Local>
+							</Reference>
+						</ObjectList>
+					</ObjectLists>
+				</MusicSegment>
+			</ChildrenList>
+		</WorkUnit>
 	</InteractiveMusic>
 </WwiseDocument>

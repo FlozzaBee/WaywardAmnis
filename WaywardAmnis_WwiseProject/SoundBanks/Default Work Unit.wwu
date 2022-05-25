@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{E0A0EC7F-F83F-4D94-9628-9B6D8673AC7F}" SchemaVersion="103">
 	<SoundBanks>
-		<WorkUnit Name="Default Work Unit" ID="{E0A0EC7F-F83F-4D94-9628-9B6D8673AC7F}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{E0A0EC7F-F83F-4D94-9628-9B6D8673AC7F}" PersistMode="Standalone">
+			<ChildrenList>
+				<SoundBank Name="Main_Soundbank" ID="{55CCF385-2BF4-4F75-A29C-00D0C716BA9C}">
+					<ObjectInclusionList>
+						<ObjectRef Name="Play_Wayward_Amnis_sky_level" ID="{542CA057-AB57-45F9-BB40-DCE7B5406E58}" WorkUnitID="{9789605A-9E46-45C1-84FC-AA46429CB57E}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Stop_Wayward_Amnis_water_level" ID="{0B8FEDBC-E758-4A45-969E-887B0E7F3AD9}" WorkUnitID="{9789605A-9E46-45C1-84FC-AA46429CB57E}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Stop_Wayward_Amnis_sky_level" ID="{2789BDD1-A40B-4BA6-8F37-C11D041C3EDD}" WorkUnitID="{9789605A-9E46-45C1-84FC-AA46429CB57E}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Play_Wayward_Amnis_water_level" ID="{9C7A8D55-24E1-4EF8-A8DD-FE6C16EF9895}" WorkUnitID="{9789605A-9E46-45C1-84FC-AA46429CB57E}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+			</ChildrenList>
+		</WorkUnit>
 	</SoundBanks>
 </WwiseDocument>

@@ -1,3 +1,11 @@
+State Group	ID	Name			Wwise Object Path	Notes
+	2434766612	Music_State_Group			\Default Work Unit\Music_State_Group	
+
+State	ID	Name	State Group			Notes
+	748895195	None	Music_State_Group			
+	2008033692	Water_State	Music_State_Group			
+	2459462677	Air_State	Music_State_Group			
+
 Audio Bus	ID	Name			Wwise Object Path	Notes
 	3803692087	Master Audio Bus			\Default Work Unit\Master Audio Bus	
 
