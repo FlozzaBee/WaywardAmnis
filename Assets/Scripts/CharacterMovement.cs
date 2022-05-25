@@ -97,7 +97,7 @@ public class CharacterMovement : MonoBehaviour
 
     private void Start()
     {
-        QualitySettings.vSyncCount = 0; //for testing framerate dependency, remove before ship
+        //QualitySettings.vSyncCount = 0; //for testing framerate dependency, remove before ship
 
         marvinStopper = transform.position.z;
 
@@ -120,7 +120,7 @@ public class CharacterMovement : MonoBehaviour
 
     void Update()
     {
-        Application.targetFrameRate = targetFrameRate; //for testing framerate dependency, remove before ship
+        //Application.targetFrameRate = targetFrameRate; //for testing framerate dependency, remove before ship
 
         Vector3 direction = Vector3.zero;
         if (playerControl == true) // player control is disabled by some events
