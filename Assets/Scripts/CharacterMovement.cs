@@ -11,6 +11,7 @@ public class CharacterMovement : MonoBehaviour
     public FlockManager flockManager;
     public UIManager uiManager;
     public Animator anim;
+    public Menu menu;
 
     
     
@@ -84,6 +85,7 @@ public class CharacterMovement : MonoBehaviour
     private float turnSmoothVelocity1;
     private float marvinStopper;
     private bool controllerEnabled = false;
+    private bool paused = false;
 
     
 
@@ -121,6 +123,8 @@ public class CharacterMovement : MonoBehaviour
     void Update()
     {
         //Application.targetFrameRate = targetFrameRate; //for testing framerate dependency, remove before ship
+        
+        
 
         Vector3 direction = Vector3.zero;
         if (playerControl == true) // player control is disabled by some events
@@ -164,8 +168,10 @@ public class CharacterMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Escape"))
         {
-            Application.Quit();
-            Debug.Log("Quit Called");
+            //Application.Quit();
+            //Debug.Log("Quit Called");
+
+            menu.PauseGame();
         }//quits program on esc (and r2 for some reason?)
 
         if (Input.GetButtonDown("Reset"))
