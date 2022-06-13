@@ -1426,8 +1426,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 03feb406f1b593d408c0dcdecac8c9a0, type: 3}
   m_PrefabInstance: {fileID: 1254334779}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &74193465
-MeshCollider:
+--- !u!65 &74193465
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1436,10 +1436,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -484028592724700784, guid: 03feb406f1b593d408c0dcdecac8c9a0, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.14024729, y: 0.021331584, z: 0.20483212}
+  m_Center: {x: 0.05754479, y: -0.07979926, z: -0.003956097}
 --- !u!1001 &74702624
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2931,8 +2930,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 0
-    m_WrapAround: 0
+    m_Mode: 2
+    m_WrapAround: 1
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -11926,6 +11925,57 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6228760443382524406, guid: d73fa0ea1aab4ae4481be3fbf54cff37, type: 3}
   m_PrefabInstance: {fileID: 474197799}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &407072204
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 407072205}
+  - component: {fileID: 407072206}
+  m_Layer: 5
+  m_Name: Indicator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &407072205
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407072204}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1046766088}
+  - {fileID: 661297475}
+  m_Father: {fileID: 968448453}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 185.07971}
+  m_SizeDelta: {x: 0, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &407072206
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407072204}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!4 &409052443 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6228760443382524406, guid: d73fa0ea1aab4ae4481be3fbf54cff37, type: 3}
@@ -14318,7 +14368,7 @@ RectTransform:
   - {fileID: 166267590}
   - {fileID: 2033097177}
   m_Father: {fileID: 968448453}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -16020,19 +16070,19 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 661297474}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 553160364}
   - {fileID: 485377596}
-  m_Father: {fileID: 968448453}
+  m_Father: {fileID: 407072205}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -55}
+  m_AnchoredPosition: {x: 0, y: -29.999998}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &661297476
@@ -21943,8 +21993,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1046766088}
-  - {fileID: 661297475}
+  - {fileID: 407072205}
   - {fileID: 558913088}
   m_Father: {fileID: 0}
   m_RootOrder: 9
@@ -21970,6 +22019,8 @@ MonoBehaviour:
   volumeProfile: {fileID: 11400000, guid: 4d959fcea1240164cb36739bd92da814, type: 2}
   pauseMenu: {fileID: 558913087}
   canvas: {fileID: 558913089}
+  indicator: {fileID: 407072206}
+  eventSystem: {fileID: 1315308378}
   smoothSpeed: 0.05
   focalLength: 3
   p_focalLength: 20
@@ -23051,7 +23102,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1046766087}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 1
@@ -23059,12 +23110,12 @@ RectTransform:
   - {fileID: 1743639380}
   - {fileID: 1720346826}
   - {fileID: 2130809982}
-  m_Father: {fileID: 968448453}
+  m_Father: {fileID: 407072205}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -25}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!95 &1046766089
@@ -28893,7 +28944,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 2096741985}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1315308379
@@ -29911,6 +29962,7 @@ MonoBehaviour:
   waitForThanksCam: 12
   waitForCreditsCam: 12
   waitForTitleCam: 8
+  waitOnTitle: 20
 --- !u!4 &1346691588
 Transform:
   m_ObjectHideFlags: 0
@@ -45006,8 +45058,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 0
-    m_WrapAround: 0
+    m_Mode: 2
+    m_WrapAround: 1
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -51485,8 +51537,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 0
-    m_WrapAround: 0
+    m_Mode: 2
+    m_WrapAround: 1
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}

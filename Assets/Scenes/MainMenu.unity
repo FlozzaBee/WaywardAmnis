@@ -466,6 +466,7 @@ GameObject:
   m_Component:
   - component: {fileID: 250429343}
   - component: {fileID: 250429342}
+  - component: {fileID: 250429344}
   m_Layer: 0
   m_Name: MenuManager
   m_TagString: Untagged
@@ -480,12 +481,19 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 250429341}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: acf190cfcb39ae847824a4d3105a3cf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   SceneName: SampleScene
+  volumeProfile: {fileID: 0}
+  pauseMenu: {fileID: 0}
+  canvas: {fileID: 0}
+  indicator: {fileID: 0}
+  smoothSpeed: 0.05
+  focalLength: 1
+  p_focalLength: 20
 --- !u!4 &250429343
 Transform:
   m_ObjectHideFlags: 0
@@ -501,6 +509,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &250429344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 250429341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90d17a63d08568d4b8f39811bdf01536, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SceneName: SampleScene
 --- !u!1001 &253102964
 PrefabInstance:
   m_ObjectHideFlags: 0

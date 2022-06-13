@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EventManager : MonoBehaviour
 {
@@ -63,6 +64,7 @@ public class EventManager : MonoBehaviour
     public float waitForThanksCam = 10;
     public float waitForCreditsCam = 5;
     public float waitForTitleCam = 5;
+    public float waitOnTitle = 10;
 
     
     void Update()
@@ -335,6 +337,11 @@ public class EventManager : MonoBehaviour
         cinemachinceSwitch.SwitchState("End 3");
         cinemachinceSwitch.SwitchState("End 3"); //it crahsed after adding a third yield so im kinda sus
         Debug.Log("moving to title cam");
+
+        yield return new WaitForSeconds(waitOnTitle);
+        SceneManager.LoadScene(0);
+        Time.timeScale = 1;//just in case
+        //resets game after credits
     }
 
 

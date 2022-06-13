@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering;
+using UnityEngine.EventSystems;
+
 
 public class Menu : MonoBehaviour
 {
@@ -14,6 +16,12 @@ public class Menu : MonoBehaviour
     //button alpha 
     public CanvasGroup canvas;
     private float alphaRef;
+
+    //button alpha
+    public CanvasGroup indicator;
+
+    //controller fix
+    public EventSystem eventSystem;
     
 
     private UnityEngine.Rendering.Universal.DepthOfField depthOfField;
@@ -29,6 +37,7 @@ public class Menu : MonoBehaviour
     public float p_focalLength = 20;
 
     private float targetAlpha = 0;
+    private bool doneUnpause = true; 
 
  
     public void PlayGame()
@@ -56,22 +65,29 @@ public class Menu : MonoBehaviour
             Debug.Log("paused");
             pauseMenu.SetActive(true);
             targetAlpha = 1;
+            paused = !paused;
+            eventSystem.SetSelectedGameObject(eventSystem.firstSelectedGameObject);
+            return;
         }
-        if (paused)
+        if (paused && doneUnpause)
         {
             Time.timeScale = 1f;
             Debug.Log("unpaused");
             //pauseMenu.SetActive(false);
             StartCoroutine(waitForAlpha(0.2f));
-            targetAlpha = 0; 
+            targetAlpha = 0;
+            doneUnpause = false;
+            paused = !paused;
         }
-        paused = !paused;
+        
     }
     
     IEnumerator waitForAlpha(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
         pauseMenu.SetActive(false);
+        doneUnpause = true;
+        
     }
 
 
@@ -89,13 +105,14 @@ public class Menu : MonoBehaviour
             {
                 currentFocalLength = Mathf.SmoothDamp(currentFocalLength, p_focalLength, ref smoothDampRef, smoothSpeed);
                 canvas.alpha = Mathf.SmoothDamp(canvas.alpha, targetAlpha, ref alphaRef, smoothSpeed);
+                
             }
             else
             {
                 currentFocalLength = Mathf.SmoothDamp(currentFocalLength, focalLength, ref smoothDampRef, smoothSpeed * 5);
                 canvas.alpha = Mathf.SmoothDamp(canvas.alpha, targetAlpha, ref alphaRef, smoothSpeed * 5);
             }
-
+            indicator.alpha = 1 - canvas.alpha;
             depthOfField.focalLength.Override(currentFocalLength);
             //Debug.Log("current Focal Length " + currentFocalLength);
         }
