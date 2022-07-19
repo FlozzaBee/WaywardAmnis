@@ -43,12 +43,13 @@ public class CharacterMovement : MonoBehaviour
     public float landSpeedSmoothTime = 0.25f;
     public float gravity = 9.81f;
     public float landTurnSmoothTime = 0.2f;
+
     private float landSpeedCurrent;
     private float landSpeedRef;
     private float verSpeed;
     private bool leftFacing;
     private float landSmoothTurnRef;
-    private bool zLeveled = false;
+    private bool zLeveled = false;  //used to correct the players rotation just after movement type change
     private float landZTurnRef;
 
     [Header("End Movement")]
@@ -85,8 +86,6 @@ public class CharacterMovement : MonoBehaviour
     private float turnSmoothVelocity1;
     private float marvinStopper;
     private bool controllerEnabled = false;
-    private bool paused = false;
-
     
 
     //eventManager related
@@ -193,7 +192,7 @@ public class CharacterMovement : MonoBehaviour
         transform.position = new Vector3(transform.position.x, transform.position.y, marvinStopper);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other) //checks for the player entering certain colliders to then trigger events in the event manager
     {
         if (other.tag == "DoorTrigger")
         {
@@ -208,7 +207,7 @@ public class CharacterMovement : MonoBehaviour
         if (other.tag == "SharkTrigger")
         {
             eventManager.SharkEvent(other); 
-        }//calls events in event manager when touches triggers
+        }
 
         if (other.tag == "AirMovementTrigger")
         {
@@ -233,7 +232,7 @@ public class CharacterMovement : MonoBehaviour
         if (other.tag == "LandMovementTrigger")
         {
             eventManager.LandMovementTrigger(other);
-        }
+        } //switches to land movement
 
         if (other.tag == "EndTrigger")
         {
@@ -248,10 +247,10 @@ public class CharacterMovement : MonoBehaviour
         {
             eventManager.WaterCollisionExit();
         }
-    }
+    } //used to prevent players diving back into the water after entering air biome
 
 
-    //haptic controller 
+    
 
     private void PlayerMovement(Vector3 direction)//called in update
     {
@@ -444,6 +443,7 @@ public class CharacterMovement : MonoBehaviour
         controller.Move(moveVector);
     }
 
+    //haptic controller 
     public void ControllerRumbleLight()
     {
         if (controllerEnabled == true) //checks if controller is connected, otherwise causes crashes when haptics are called and no controller is plugged in. 
@@ -466,7 +466,7 @@ public class CharacterMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
         isIdleTurning = false;
-    }
+    } 
 
     IEnumerator lightVibrationDuration(float vibrateDuration)
     {

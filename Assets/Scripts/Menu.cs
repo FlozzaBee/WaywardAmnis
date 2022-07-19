@@ -57,6 +57,13 @@ public class Menu : MonoBehaviour
         Time.timeScale = 1; //resets time scale since its lowered after pausing
     }
 
+    public void ReturnToTitle()
+    {
+        SceneManager.LoadScene(0); //returns to title scene
+        Time.timeScale = 1; //resets time scale 
+    }
+    //these methods are called via button On Clicks
+
     public void PauseGame()
     {
         if (!paused)
@@ -64,17 +71,16 @@ public class Menu : MonoBehaviour
             Time.timeScale = 0.1f;
             Debug.Log("paused");
             pauseMenu.SetActive(true);
-            targetAlpha = 1;
+            targetAlpha = 1; //enables menu ui and slows time
             paused = !paused;
-            eventSystem.SetSelectedGameObject(eventSystem.firstSelectedGameObject);
+            eventSystem.SetSelectedGameObject(eventSystem.firstSelectedGameObject); //sets which menu item is selected, for better controller support
             return;
         }
         if (paused && doneUnpause)
         {
-            Time.timeScale = 1f;
+            Time.timeScale = 1f; //resumes time scale to normal
             Debug.Log("unpaused");
-            //pauseMenu.SetActive(false);
-            StartCoroutine(waitForAlpha(0.2f));
+            StartCoroutine(waitForAlpha(0.2f)); //slight delay prevents issues from quick pause inputs
             targetAlpha = 0;
             doneUnpause = false;
             paused = !paused;
@@ -86,7 +92,7 @@ public class Menu : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
         pauseMenu.SetActive(false);
-        doneUnpause = true;
+        doneUnpause = true; //disables the ui after its faded to 0% opacity and allows pausing again
         
     }
 
@@ -99,21 +105,22 @@ public class Menu : MonoBehaviour
     }
     private void Update()
     {
-        if (Mathf.Abs(canvas.alpha - targetAlpha) > 0.01f)
+        if (Mathf.Abs(canvas.alpha - targetAlpha) > 0.01f) //only calculates new alpha when above above threshold difference from target alpha
         {
             if (paused)
             {
-                currentFocalLength = Mathf.SmoothDamp(currentFocalLength, p_focalLength, ref smoothDampRef, smoothSpeed);
-                canvas.alpha = Mathf.SmoothDamp(canvas.alpha, targetAlpha, ref alphaRef, smoothSpeed);
+                currentFocalLength = Mathf.SmoothDamp(currentFocalLength, p_focalLength, ref smoothDampRef, smoothSpeed); //calculates depth of field change to smoothly blur background 
+                canvas.alpha = Mathf.SmoothDamp(canvas.alpha, targetAlpha, ref alphaRef, smoothSpeed); //calculates alpha to smoothly fade in menu
                 
             }
             else
             {
-                currentFocalLength = Mathf.SmoothDamp(currentFocalLength, focalLength, ref smoothDampRef, smoothSpeed * 5);
-                canvas.alpha = Mathf.SmoothDamp(canvas.alpha, targetAlpha, ref alphaRef, smoothSpeed * 5);
+                currentFocalLength = Mathf.SmoothDamp(currentFocalLength, focalLength, ref smoothDampRef, smoothSpeed * 5); //calculates depth of field change to smoothly un-blur background 
+                canvas.alpha = Mathf.SmoothDamp(canvas.alpha, targetAlpha, ref alphaRef, smoothSpeed * 5); //calculates alpha to smoothly fade out menu. 
+                //the smoothSpeed is increased to compensate for the timescale change when paused
             }
             indicator.alpha = 1 - canvas.alpha;
-            depthOfField.focalLength.Override(currentFocalLength);
+            depthOfField.focalLength.Override(currentFocalLength); //applies alpha and depth of field calculations
             //Debug.Log("current Focal Length " + currentFocalLength);
         }
     }

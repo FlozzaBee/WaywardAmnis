@@ -376,7 +376,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7771482, y: 1}
+    m_SensorSize: {x: 1.7779588, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1446,6 +1446,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 226164754}
     m_Modifications:
+    - target: {fileID: -8709665835127633349, guid: 7ea31c59bc9b05440bce3ddf4ca0c3d4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0.000013658339
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7ea31c59bc9b05440bce3ddf4ca0c3d4, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -1493,6 +1497,18 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 7ea31c59bc9b05440bce3ddf4ca0c3d4, type: 3}
       propertyPath: m_Name
       value: PlayerCharacterV4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5858999262465302258, guid: 7ea31c59bc9b05440bce3ddf4ca0c3d4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 2.5111779e-14
+      objectReference: {fileID: 0}
+    - target: {fileID: 6648591251221452101, guid: 7ea31c59bc9b05440bce3ddf4ca0c3d4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 89.99967
+      objectReference: {fileID: 0}
+    - target: {fileID: 6648591251221452101, guid: 7ea31c59bc9b05440bce3ddf4ca0c3d4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -10.769069
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ea31c59bc9b05440bce3ddf4ca0c3d4, type: 3}
@@ -29439,7 +29455,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7771482, y: 1}
+    m_SensorSize: {x: 1.7779588, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -45091,7 +45107,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 968448454}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
-        m_MethodName: QuitGame
+        m_MethodName: ReturnToTitle
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

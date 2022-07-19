@@ -6,6 +6,8 @@ using Cinemachine;
 public class CameraZoom : MonoBehaviour
 {
     public GameObject player;
+    public CinemachineVirtualCamera vCam;
+
     [Header("Zoom in Parameters")]
     public Vector3 startPoint;
     public Vector3 endPoint;
@@ -13,26 +15,23 @@ public class CameraZoom : MonoBehaviour
     public float startZoomDistance = 20;
     public float endZoomDistance = 12; 
 
-    public CinemachineVirtualCamera vCam;
-
-    private CinemachineFramingTransposer transposer;
-
     [Header("Zoom out parameters")]
     public float zoomOutTarget = 40;
     public float zoomOutTime = 5;
     public float camHeightTarget = 7f;
     private float camZoomSmoothRef;
-    private float camXMoveSmoothRef;
+    private float camXMoveSmoothRef; //used for smoothdamps
 
     [Header("Modified by EventManager")]
     public bool isZoomingIn = true;
     public bool isZoomingOut = false;
 
-    //Zooms camera into the player character on the final stretch of the game. 
+
+    private CinemachineFramingTransposer transposer;
 
     private void Start()
     {
-        transposer = vCam.GetCinemachineComponent<CinemachineFramingTransposer>();
+        transposer = vCam.GetCinemachineComponent<CinemachineFramingTransposer>(); //gets cinemachine virtual camera position perameters 
     }
     private void Update()
     {
@@ -40,11 +39,12 @@ public class CameraZoom : MonoBehaviour
         {
             float lerpDistance = endPoint.x - startPoint.x;
             float lerpFraction = (player.transform.position.x - startPoint.x) / lerpDistance;
-            float cameraDist = Mathf.Lerp(startZoomDistance, endZoomDistance, lerpFraction);
+            float cameraDist = Mathf.Lerp(startZoomDistance, endZoomDistance, lerpFraction); 
+            //moves camera closer to the player by a fraction of their progress through the final area
             //Debug.Log(cameraDist);
-            transposer.m_CameraDistance = cameraDist;
-        } //zooms in with progression betwee target points.
-        
+            transposer.m_CameraDistance = cameraDist; 
+        } //Zooms camera into the player character on the final stretch of the game. 
+
         if (isZoomingOut)
         {
             transposer.m_CameraDistance = Mathf.SmoothDamp(transposer.m_CameraDistance, zoomOutTarget, ref camZoomSmoothRef, zoomOutTime);

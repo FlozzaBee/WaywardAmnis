@@ -25,7 +25,7 @@ public class EventManager : MonoBehaviour
 
     [Header("Hammerhead pass event")]
     public int SharkFlockSizeTarget = 18;
-    public Animator hammerheadAnimator; //i was working on this its not finished yet dont forget 
+    public Animator hammerheadAnimator;
     public GameObject shark;
     public GameObject sharkBarrier;
     public float sharkAttackFleeDuration = 1f;
@@ -69,14 +69,7 @@ public class EventManager : MonoBehaviour
     
     void Update()
     {
-        /*if (Input.GetKeyDown(KeyCode.T))
-        {
-            Debug.Log("animStarting?");
-            foreach (Animator animator in BuildingAnim)
-            {
-                animator.SetBool("IsFallTrigger", true);
-            }
-        }*/
+
 
         if (sharkFollow == true)
         {
@@ -104,7 +97,7 @@ public class EventManager : MonoBehaviour
         }*/
 
     }
-    public void DoorOpenAnimation() //animation classes are called in ontriggerenter in the character movement scripts.
+    public void DoorOpenAnimation() //events  are called in ontriggerenter in the character movement scripts.
     {
         foreach(Animator animator in DoorAnim)
         {

@@ -491,6 +491,7 @@ MonoBehaviour:
   pauseMenu: {fileID: 0}
   canvas: {fileID: 0}
   indicator: {fileID: 0}
+  eventSystem: {fileID: 0}
   smoothSpeed: 0.05
   focalLength: 1
   p_focalLength: 20
@@ -1845,8 +1846,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 250429342}
-        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
+      - m_Target: {fileID: 250429344}
+        m_TargetAssemblyTypeName: StartMenu, Assembly-CSharp
         m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
